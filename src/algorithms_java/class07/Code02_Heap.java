@@ -58,11 +58,7 @@ public class Code02_Heap {
             left = 2 * index + 1;
         }
     }
-    public static void buildHeep(int[] heep){
-        for(int i = heep.length - 1; i >= 0; i--){
-            heapify(heep, i, heep.length);
-        }
-    }
+
 
     public static int heapTop(int[] heep, int size){
         int res = heep[0];
