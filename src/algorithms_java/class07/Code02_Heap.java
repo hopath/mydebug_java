@@ -6,7 +6,7 @@ package algorithms_java.class07;
  */
 public class Code02_Heap {
 
-    public static void heapSort(int arr[]){
+    public static void heapSort(int[] arr){
         //建堆
         for(int i = 0; i < arr.length; i++){
             Code02_Heap.heepInsert(arr, i);
@@ -43,7 +43,7 @@ public class Code02_Heap {
 //        }
     }
 
-    private static void heapify(int heep[], int index, int size){
+    private static void heapify(int[] heep, int index, int size){
         int left = 2 * index + 1;
         while(left < size){
             //找最大的那个孩子，若是右孩子存在且大于左孩子则是右，否则是左
@@ -56,6 +56,11 @@ public class Code02_Heap {
             swap(heep, largest, index);
             index = largest;
             left = 2 * index + 1;
+        }
+    }
+    public static void buildHeep(int[] heep){
+        for(int i = heep.length - 1; i >= 0; i--){
+            heapify(heep, i, heep.length);
         }
     }
 
