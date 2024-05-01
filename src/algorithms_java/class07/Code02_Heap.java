@@ -10,6 +10,7 @@ public class Code02_Heap {
         //建堆
         for(int i = 0; i < arr.length; i++){
             Code02_Heap.heepInsert(arr, i);
+
         }
         /*
             第一个元素和最后一个交换，然后将堆收缩一个在进行(此时的最大值已经在最右端了)
