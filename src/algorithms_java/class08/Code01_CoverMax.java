@@ -55,6 +55,7 @@ public class Code01_CoverMax {
             }
             heap.add(lineArrayList.get(i).end);
             max = heap.size() > max ? heap.size() : max;
+
         }
         return max;
     }
