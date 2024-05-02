@@ -57,7 +57,6 @@ public class Code01_CoverMax {
             max = heap.size() > max ? heap.size() : max;
         }
         return max;
-
     }
 
     @Test
