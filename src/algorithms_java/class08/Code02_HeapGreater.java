@@ -91,5 +91,6 @@ public class Code02_HeapGreater<T> {
         heap.set(j, t1);
         hashMap.put(t1, j);
         hashMap.put(t2, i);
+
     }
 }
