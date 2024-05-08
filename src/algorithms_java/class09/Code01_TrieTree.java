@@ -102,5 +102,6 @@ public class Code01_TrieTree {
             node = node.next[path];
         }
         return node.pass;
+
     }
 }
