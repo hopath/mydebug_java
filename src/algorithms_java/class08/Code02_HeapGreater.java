@@ -9,8 +9,8 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class Code02_HeapGreater<T> {
-    private ArrayList<T> heap = new ArrayList<>();
-    private HashMap<T, Integer> hashMap = new HashMap<>();
+    private ArrayList<T> heap;
+    private HashMap<T, Integer> hashMap;
     private int heapSize = 0;
     private Comparator<? super T> cmp;
 
@@ -28,6 +28,9 @@ public class Code02_HeapGreater<T> {
         return hashMap.containsKey(obj);
     }
 
+    public int size(){
+        return heapSize;
+    }
     public T peek() {
         return heap.get(0);
     }
@@ -36,7 +39,7 @@ public class Code02_HeapGreater<T> {
         heap.add(obj);
         hashMap.put(obj, heapSize);
         heapInsert(heapSize++);
-    }
+    } 
 
     public T pop(){
         T t = heap.get(0);
@@ -84,13 +87,44 @@ public class Code02_HeapGreater<T> {
         }
     }
 
-    private void swap(int i, int j) {
+    public void swap(int i, int j) {
         T t1 = heap.get(i);
         T t2 = heap.get(j);
         heap.set(i, t2);
         heap.set(j, t1);
         hashMap.put(t1, j);
         hashMap.put(t2, i);
+    }
 
+    public ArrayList<T> getHeap() {
+        return heap;
+    }
+
+    public void setHeap(ArrayList<T> heap) {
+        this.heap = heap;
+    }
+
+    public HashMap<T, Integer> getHashMap() {
+        return hashMap;
+    }
+
+    public void setHashMap(HashMap<T, Integer> hashMap) {
+        this.hashMap = hashMap;
+    }
+
+    public int getHeapSize() {
+        return heapSize;
+    }
+
+    public void setHeapSize(int heapSize) {
+        this.heapSize = heapSize;
+    }
+
+    public Comparator<? super T> getCmp() {
+        return cmp;
+    }
+
+    public void setCmp(Comparator<? super T> cmp) {
+        this.cmp = cmp;
     }
 }
