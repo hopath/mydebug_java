@@ -8,6 +8,7 @@ import java.util.HashMap;
  */
 public class Code01_TrieTree {
 
+    //next为数组
     class TrieTree01{
         private class Node{
             public int pass;
@@ -108,6 +109,7 @@ public class Code01_TrieTree {
         }
     }
 
+    //next为HashMap
     class TrieTree02{
         private class Node02{
             public int pass;
