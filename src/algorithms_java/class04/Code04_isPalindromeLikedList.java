@@ -78,4 +78,5 @@ public class Code04_isPalindromeLikedList {
             pre = rNext;
         }
     }
+
 }
