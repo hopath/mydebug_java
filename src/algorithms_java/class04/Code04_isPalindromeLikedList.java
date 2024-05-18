@@ -11,15 +11,15 @@ public class Code04_isPalindromeLikedList {
         test.next = new Code03_LinkedListMid.Node(2);
         test.next.next = new Code03_LinkedListMid.Node(3);
         test.next.next.next = new Code03_LinkedListMid.Node(4);
-        test.next.next.next.next = new Code03_LinkedListMid.Node(5);
-        test.next.next.next.next.next = new Code03_LinkedListMid.Node(6);
-        test.next.next.next.next.next.next = new Code03_LinkedListMid.Node(7);
-        test.next.next.next.next.next.next.next = new Code03_LinkedListMid.Node(8);
-
+        test.next.next.next.next = new Code03_LinkedListMid.Node(3);
+        test.next.next.next.next.next = new Code03_LinkedListMid.Node(2);
+        test.next.next.next.next.next.next = new Code03_LinkedListMid.Node(1);
+        //test.next.next.next.next.next.next.next = new Code03_LinkedListMid.Node(1);
+        System.out.println(isPalindromeLikedList(test));
         Code03_LinkedListMid.printLinkedList(test);
-        System.out.println();
-        insertEqualNode(test);
-        Code03_LinkedListMid.printLinkedList(test);
+    }
+    public static boolean isPalindromeLikedListByStack(Code03_LinkedListMid.Node head){
+        return true;
     }
     public static boolean isPalindromeLikedList(Code03_LinkedListMid.Node head){
         if(head == null || head.next == null || head.next.next == null){
@@ -40,15 +40,35 @@ public class Code04_isPalindromeLikedList {
             cur = next;
         }
 
+        Code03_LinkedListMid.Node last = pre;
         //从左向右，从右向左同时遍历，若遍历过程中左右对应值不同则返回false
         while(head != null){
             if(head.value != pre.value){
+                //将链表调回去
+                pre = last;
+                next = last.next;
+                last.next = null;
+                while(pre != mid){
+                    last = next;
+                    next = last.next;
+                    last.next = pre;
+                    pre = last;
+                }
                 return false;
             }
             head = head.next;
             pre = pre.next;
         }
-
+        //将链表调回去
+        pre = last;
+        next = last.next;
+        last.next = null;
+        while(pre != mid){
+            last = next;
+            next = last.next;
+            last.next = pre;
+            pre = last;
+        }
         return true;
     }
 
@@ -78,5 +98,4 @@ public class Code04_isPalindromeLikedList {
             pre = rNext;
         }
     }
-
 }
