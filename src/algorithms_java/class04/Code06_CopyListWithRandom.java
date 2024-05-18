@@ -6,4 +6,5 @@ package algorithms_java.class04;
  */
 public class Code06_CopyListWithRandom {
 
+
 }
