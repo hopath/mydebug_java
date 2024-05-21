@@ -92,7 +92,6 @@ public class Code06_CopyListWithRandom {
 
 
     public static RNode copyListWithRandom03(RNode rNode){
-
     }
 
 }
