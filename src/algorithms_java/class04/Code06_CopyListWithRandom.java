@@ -1,5 +1,7 @@
 package algorithms_java.class04;
 
+import java.util.HashMap;
+
 /**
  * @author 张志伟
  * @version 1.0
@@ -14,7 +16,7 @@ public class Code06_CopyListWithRandom {
         rNode.next.next.random = rNode.next;
         printLinkedList(rNode);
         System.out.println();
-        RNode copy = copyListWithRandom01(rNode);
+        RNode copy = copyListWithRandom03(rNode);
         System.out.println(copy.random.value);
         System.out.println(copy.next.random.value);
         System.out.println(copy.next.next.random.value);
@@ -91,7 +93,24 @@ public class Code06_CopyListWithRandom {
     }
 
 
-    public static RNode copyListWithRandom03(RNode rNode){
+    public static RNode copyListWithRandom03(RNode head){
+        HashMap<RNode, RNode> nodeHashMap = new HashMap<>();
+        RNode cur = head;
+
+        while(cur != null){
+            nodeHashMap.put(cur, new RNode(cur.value));
+            cur = cur.next;
+        }
+
+        cur = head;
+        while(cur != null){
+            RNode ncur = nodeHashMap.get(cur);
+            ncur.next = nodeHashMap.get(cur.next);
+            ncur.random = nodeHashMap.get(cur.random);
+            cur = cur.next;
+        }
+
+        return nodeHashMap.get(head);
     }
 
 }
