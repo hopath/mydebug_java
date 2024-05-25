@@ -9,16 +9,24 @@ import java.util.HashMap;
 public class Code06_CopyListWithRandom {
     public static void main(String[] args) {
         RNode rNode = new RNode(3);
+        RNode tmp = rNode;
         rNode.random = rNode;
         rNode.next = new RNode(2);
-        rNode.next.random = rNode;
+        rNode.next.random = rNode.next;
         rNode.next.next = new RNode(1);
-        rNode.next.next.random = rNode.next;
+        rNode.next.next.random = rNode.next.next;
         printLinkedList(rNode);
         System.out.println();
-        RNode copy = copyListWithRandom03(rNode);
+        System.out.println(tmp.random.value);
+        System.out.println(tmp.next.random.value);
+        //System.out.println(tmp.next.next);
+        System.out.println(tmp.next.next.random.value);
+        RNode copy = copyListWithRandom01(rNode);
+        printLinkedList(copy);
+        System.out.println();
         System.out.println(copy.random.value);
         System.out.println(copy.next.random.value);
+        //System.out.println(copy.next.next);
         System.out.println(copy.next.next.random.value);
     }
     public static void printLinkedList(RNode head) {
@@ -67,20 +75,21 @@ public class Code06_CopyListWithRandom {
             cur = next;
         }
 
+        //解决random指向问题
         cur = head;
-        while(cur.next.next != null){
+        while(cur != null){
             RNode left = cur;
             RNode right = cur.next;
 
-            if(right.random != null){
+            if(left.random != null){
                 right.random = left.random.next;
             }else {
                 right.random = null;
             }
-
             cur = cur.next.next;
         }
 
+        //next连接
         RNode res = head.next;
         cur = head.next;
         while(cur.next != null){
