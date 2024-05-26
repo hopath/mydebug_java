@@ -173,6 +173,5 @@ public class Code07_FindFirstIntersectNode {
         }
 
         return cur1;
-
     }
 }
