@@ -7,21 +7,49 @@ import java.util.HashSet;
  * @version 1.0
  */
 public class Code07_FindFirstIntersectNode {
-
-    public static void main(String[] args) {
-
-    }
     static class Node{
         int value;
         Node next;
 
-        public Node(int value, Node next) {
+        public Node(int value) {
             this.value = value;
-            this.next = next;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    '}';
         }
     }
 
-    
+    public static void main(String[] args) {
+        Node head1 = new Node(3);
+        head1.next = new Node(4);
+        head1.next.next = new Node(5);
+
+        Node head2 = new Node(2);
+        head2.next = new Node(6);
+        head2.next = head1.next;
+
+        System.out.println(findFirstIntersectNode(head1, head2));
+    }
+
+
+    public static Node findFirstIntersectNode(Node head1, Node head2){
+        Node loop01 = isLoop03(head1);
+        Node loop02 = isLoop03(head2);
+
+        if(loop01 == null && loop02 == null){
+            return noLoop02(head1, head2);
+        }
+
+        if(loop01 != null && loop02 != null){
+            return twoLoop(head1, head2);
+        }
+
+        return null;
+    }
     public static Node isLoop01(Node head){
         HashSet<Node> nodes = new HashSet<>();
         while(head != null){
@@ -60,7 +88,11 @@ public class Code07_FindFirstIntersectNode {
 
         return null;
     }
-
+    /*
+        若是循环链表，则不用考虑边界影响
+        若不是循环链表，要从  0,1,2,3四种情况进行考虑，
+        来卡边界
+     */
     public static Node isLoop03(Node head){
         if(head == null || head.next == null){
             return null;
@@ -159,7 +191,7 @@ public class Code07_FindFirstIntersectNode {
 
         //重定向较长的链表,根据差值的正负
         cur1 = n > 0 ? head1 : head2;
-        cur2 = cur1 == head1 ? head2 : head1;
+        cur2 =  cur1 == head1 ? head2 : head1;
 
         n = Math.abs(n);
 
@@ -173,5 +205,67 @@ public class Code07_FindFirstIntersectNode {
         }
 
         return cur1;
+    }
+
+    public static Node twoLoop(Node head1, Node head2){
+        //返回入环节点
+        Node loop1 = isLoop03(head1);
+        Node loop2 = isLoop03(head2);
+        /*
+            若入环节点相同则是在入环前相交
+         */
+        if(loop1 == loop2){
+            int n = 0;
+            Node cur1 = head1;   Node cur2 = head2;
+
+            //算出两个链表到入环节点距离的差值
+            while(cur1 != loop1){
+                n++;
+                cur1 = cur1.next;
+            }
+            while(cur2 != loop2){
+                n--;
+                cur2 = cur2.next;
+            }
+
+            //重新定向长链表和短链表
+            cur1 =  n > 0 ? head1 : head2;
+            cur2 =  cur1 == head1 ? head2 : head1;
+
+            n = Math.abs(n);
+
+            //长链表先走多的距离
+            for(int i = 0; i < n; i++){
+                cur1 = cur1.next;
+            }
+
+            /*
+                此时两个链表距离入环节点相同，同时距离相交节点也相同
+                故而指针相遇处就是相交节点
+             */
+            while(cur1 != cur2){
+                cur1 = cur1.next;
+                cur2 = cur2.next;
+            }
+            return cur1;
+        }
+
+        //若入环节点不同则可能不想交或者相交在入环节点之后
+
+        //注意此时head1入环节点处一定不相交
+        Node cur = loop1.next;
+
+        /*
+            若cur走完一圈还没有遇到head2的入环节点则证明两链表不相交
+            否则证明相交，返回head1或head2的入环节点
+         */
+        while(cur != loop1){
+            if(cur == loop2) {
+                return loop2;
+            }
+            cur = cur.next;
+        }
+
+        return null;
     }
 }
