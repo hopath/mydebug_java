@@ -66,6 +66,7 @@ public class Code02_UnRecursiveTraversalBT {
                 }
                 cur = cur.left;
             }
+
             TNode pop = stack.pop();
             System.out.print(pop.value + " ");
             cur = pop.right;
