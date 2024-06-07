@@ -19,7 +19,8 @@ public class Code02_UnRecursiveTraversalBT {
         root.left.left.right = new TNode(5);
         root.left.left.right.left = new TNode(6);
 
-        pos(root);
+        pre01(root);
+        pre02(root);
     }
     static class TNode{
         TNode left;
@@ -38,7 +39,8 @@ public class Code02_UnRecursiveTraversalBT {
         }
     }
 
-    public static void pre(TNode tNode){
+    //模拟递归路径
+    public static void pre01(TNode tNode){
         Stack<TNode> stack = new Stack<TNode>();
         TNode cur = tNode;
         stack.push(cur);
@@ -54,23 +56,49 @@ public class Code02_UnRecursiveTraversalBT {
         }
     }
 
-    public static void pos(TNode tNode){
+    /*
+        先将头结点压栈, pop出一个节点打印pop出的节点的值
+        之后将pop出的节点的右节点压栈，在将左节点压栈，在
+        栈空之前如此循环
+     */
+    public static void pre02(TNode tNode){
+        Stack<TNode> stack = new Stack<>();
+        TNode cur = tNode;
+        stack.push(cur);
+        while(!stack.isEmpty()){
+            TNode pop = stack.pop();
+            System.out.print(pop.value + " ");
+            if(pop.right != null){
+                stack.push(pop.right);
+            }
+            if(pop.left != null){
+                stack.push(pop.left);
+            }
+        }
+    }
+    public static void in(TNode tNode){
         Stack<TNode> stack = new Stack<>();
         TNode cur = tNode;
         stack.push(cur);
 
         while(!stack.isEmpty()){
             while(cur != null){
-                if(cur != tNode){
-                    stack.push(cur);
-                }
+                stack.push(cur);
                 cur = cur.left;
             }
 
             TNode pop = stack.pop();
+            //如果栈已经空了，那么直接退出循环
+            if(stack.isEmpty()){
+                break;
+            }
             System.out.print(pop.value + " ");
             cur = pop.right;
         }
+    }
+
+    public static void pos(TNode tNode){
+
     }
 
 }
