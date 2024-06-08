@@ -37,6 +37,7 @@ public class Code03_LevelTraversalBT {
         if(tNode == null){
             return;
         }
+
         Queue<TNode> queue = new LinkedList<>();
         TNode cur = tNode;
         queue.add(cur);
