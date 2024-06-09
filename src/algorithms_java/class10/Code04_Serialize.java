@@ -137,6 +137,7 @@ public class Code04_Serialize {
 //                queue.add(ans.right);
 //            }
 
+
             ans.left = generateTNode(levelList.poll());
             ans.right = generateTNode(levelList.poll());
             if(ans.left != null){
