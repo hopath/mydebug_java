@@ -5,5 +5,7 @@ package algorithms_java.class10;
  * @version 1.0
  */
 public class Code05_EncodeTreeToBinaryTree {
-    static class N
+    static class Node{
+
+    }
 }
