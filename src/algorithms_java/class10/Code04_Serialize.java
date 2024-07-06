@@ -58,7 +58,7 @@ public class Code04_Serialize {
         return head;
     }
 
-    //层序遍历反序列化
+    //层序遍历序列化
     public static Queue<String> levelSerial(TNode tNode){
         Queue<String> ans = new LinkedList();
         level(tNode, ans);
@@ -94,15 +94,7 @@ public class Code04_Serialize {
         }
     }
 
-
-    public static TNode generateTNode(String value){
-        if(value == "#"){
-            return null;
-        }
-
-        return new TNode(Integer.valueOf(value));
-    }
-
+    //层序遍历反序列化
     public static TNode buildByLevel(Queue<String> levelList){
         if(levelList == null || levelList.size() == 0){
             return null;
@@ -119,7 +111,7 @@ public class Code04_Serialize {
 
         TNode ans = null;
         while(!queue.isEmpty()){
-            ans = queue.poll();
+            ans = queue.poll() ;
 
 //            String left = levelList.poll();
 //            if(left == "#"){
@@ -152,5 +144,16 @@ public class Code04_Serialize {
 
         return ans;
     }
+
+    public static TNode generateTNode(String value){
+        if(value == "#"){
+            return null;
+        }
+
+        return new TNode(Integer.valueOf(value));
+    }
+
+    //Encode N-ray Tree to Binary Tree
+
 
 }
