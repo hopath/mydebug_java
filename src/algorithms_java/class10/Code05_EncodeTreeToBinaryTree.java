@@ -6,6 +6,7 @@ package algorithms_java.class10;
  */
 public class Code05_EncodeTreeToBinaryTree {
     static class Node{
+        int value;
 
     }
 }
