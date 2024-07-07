@@ -57,9 +57,25 @@ public class Code05_EncodeTreeToBinaryTree {
         root.nodes[1].nodes[0] = new Node("g");
         root.nodes[1].nodes[1] = new Node("h");
         root.nodes[1].nodes[2] = new Node("i");
-        root.nodes[1].nodes[3] = new Node("j");
-        //printTree(root);
-        pre(encodeTreeToBinaryTree(root));
+
+        Node1 root1 = new Node1("a");
+        root1.nodes.add(new Node1("b"));
+        root1.nodes.add(new Node1("c"));
+        root1.nodes.add(new Node1("d"));
+        root1.nodes.get(0).nodes.add(new Node1("e"));
+        root1.nodes.get(0).nodes.add(new Node1("f"));
+        root1.nodes.get(1).nodes.add(new Node1("g"));
+        root1.nodes.get(1).nodes.add(new Node1("h"));
+        root1.nodes.get(1).nodes.add(new Node1("i"));
+//        printTree(root);
+//        System.out.println();
+//        printTree1(root1);
+//        System.out.println();
+//        pre(encodeTreeToBinaryTree(root));
+//        System.out.println();
+//        pre(encodeTreeToBinaryTree2(root1));
+
+        System.out.println(encodeTreeToBinaryTree(root));
     }
 
     //将多叉树转换成可以转回去的二叉树
@@ -101,25 +117,41 @@ public class Code05_EncodeTreeToBinaryTree {
     }
 
     //递归实现将多叉树转换成可以转回去的二叉树
-    public static void encodeTreeToBinaryTree2(Node1 root){
+    public static BNode encodeTreeToBinaryTree2(Node1 root){
         if(root == null){
-            return;
+            return null;
         }
         BNode bNode = generateBNode(root.value);
         bNode.left = en(root.nodes);
+
+        return bNode;
     }
     private static BNode en(ArrayList<Node1> nodes){
+        BNode head = null;
+        BNode cur = null;
 
         for (Node1 node : nodes) {
-            BNode head = null;
-            BNode cur = null;
 
+            BNode tNode = generateBNode(node.value);
             if(head == null){
-                head = generateBNode(node.value);
+                head = tNode;
             }else{
-
+                cur.right = tNode;
             }
+
+            cur = tNode;
+            cur.left = en(node.nodes);
         }
+
+        return head;
+    }
+
+
+    public static Node1 encodeBinaryToTree(BNode root){
+        if(root == null){
+            return null;
+        }
+
     }
 
     public static void printTree(Node root){
@@ -134,6 +166,21 @@ public class Code05_EncodeTreeToBinaryTree {
                 while(poll.nodes[i] != null){
                     nodes.add(poll.nodes[i]);
                     i++;
+                }
+            }
+        }
+    }
+
+    public static void printTree1(Node1 root){
+        Queue<Node1> nodes = new LinkedList<>();
+        nodes.add(root);
+
+        while(!nodes.isEmpty()){
+            Node1 poll = nodes.poll();
+            if(poll != null){
+                System.out.print(poll.value + " ");
+                for(int i = 0; i < poll.nodes.size(); i++){
+                    nodes.add(poll.nodes.get(i));
                 }
             }
         }
