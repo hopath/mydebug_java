@@ -1,5 +1,6 @@
 package algorithms_java.class10;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -14,6 +15,15 @@ public class Code05_EncodeTreeToBinaryTree {
         Node[] nodes = new Node[25];
 
         public Node(String value) {
+            this.value = value;
+        }
+    }
+
+    static class Node1{
+        String value;
+        ArrayList<Node1> nodes = new ArrayList<>();
+
+        public Node1(String value) {
             this.value = value;
         }
     }
@@ -89,9 +99,29 @@ public class Code05_EncodeTreeToBinaryTree {
         }
         return BNodes.get(root.value);
     }
-    public static BNode encodeTreeToBinaryTree2(Node root){
 
+    //递归实现将多叉树转换成可以转回去的二叉树
+    public static void encodeTreeToBinaryTree2(Node1 root){
+        if(root == null){
+            return;
+        }
+        BNode bNode = generateBNode(root.value);
+        bNode.left = en(root.nodes);
     }
+    private static BNode en(ArrayList<Node1> nodes){
+
+        for (Node1 node : nodes) {
+            BNode head = null;
+            BNode cur = null;
+
+            if(head == null){
+                head = generateBNode(node.value);
+            }else{
+
+            }
+        }
+    }
+
     public static void printTree(Node root){
         Queue<Node> nodes = new LinkedList<>();
         nodes.add(root);
