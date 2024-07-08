@@ -26,6 +26,11 @@ public class Code05_EncodeTreeToBinaryTree {
         public Node1(String value) {
             this.value = value;
         }
+
+        public Node1(String value, ArrayList<Node1> nodes) {
+            this.value = value;
+            this.nodes = nodes;
+        }
     }
 
     static class BNode{
@@ -131,7 +136,6 @@ public class Code05_EncodeTreeToBinaryTree {
         BNode cur = null;
 
         for (Node1 node : nodes) {
-
             BNode tNode = generateBNode(node.value);
             if(head == null){
                 head = tNode;
@@ -152,6 +156,18 @@ public class Code05_EncodeTreeToBinaryTree {
             return null;
         }
 
+        return new Node1(root.value, decode(root.left));
+    }
+
+    private static ArrayList<Node1> decode(BNode root){
+        ArrayList<Node1> node1s = new ArrayList<>();
+
+        while(root != null){
+            Node1 cur = new Node1(root.value, decode(root.left));
+            node1s.add(cur);
+            root = root.right;
+        }
+        return node1s;
     }
 
     public static void printTree(Node root){
