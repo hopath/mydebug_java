@@ -74,13 +74,13 @@ public class Code05_EncodeTreeToBinaryTree {
         root1.nodes.get(1).nodes.add(new Node1("i"));
 //        printTree(root);
 //        System.out.println();
-//        printTree1(root1);
+        printTree1(root1);
 //        System.out.println();
 //        pre(encodeTreeToBinaryTree(root));
 //        System.out.println();
 //        pre(encodeTreeToBinaryTree2(root1));
 
-        System.out.println(encodeTreeToBinaryTree(root));
+        //System.out.println(encodeTreeToBinaryTree(root));
     }
 
     //将多叉树转换成可以转回去的二叉树
@@ -122,6 +122,7 @@ public class Code05_EncodeTreeToBinaryTree {
     }
 
     //递归实现将多叉树转换成可以转回去的二叉树
+    //遍历的限制条件是孩子节点为空
     public static BNode encodeTreeToBinaryTree2(Node1 root){
         if(root == null){
             return null;
@@ -150,7 +151,8 @@ public class Code05_EncodeTreeToBinaryTree {
         return head;
     }
 
-
+    //二叉树转多叉树
+    //限制条件为root == null
     public static Node1 encodeBinaryToTree(BNode root){
         if(root == null){
             return null;
@@ -162,6 +164,7 @@ public class Code05_EncodeTreeToBinaryTree {
     private static ArrayList<Node1> decode(BNode root){
         ArrayList<Node1> node1s = new ArrayList<>();
 
+        //确保所有节点都加入nodels
         while(root != null){
             Node1 cur = new Node1(root.value, decode(root.left));
             node1s.add(cur);
@@ -189,17 +192,30 @@ public class Code05_EncodeTreeToBinaryTree {
     }
 
     public static void printTree1(Node1 root){
-        Queue<Node1> nodes = new LinkedList<>();
-        nodes.add(root);
+//        Queue<Node1> nodes = new LinkedList<>();
+//        nodes.add(root);
+//
+//        while(!nodes.isEmpty()){
+//            Node1 poll = nodes.poll();
+//            if(poll != null){
+//                System.out.print(poll.value + " ");
+//                for(int i = 0; i < poll.nodes.size(); i++){
+//                    nodes.add(poll.nodes.get(i));
+//                }
+//            }
+//        }
 
-        while(!nodes.isEmpty()){
-            Node1 poll = nodes.poll();
-            if(poll != null){
-                System.out.print(poll.value + " ");
-                for(int i = 0; i < poll.nodes.size(); i++){
-                    nodes.add(poll.nodes.get(i));
-                }
-            }
+        if(root == null){
+            return;
+        }
+        System.out.print(root.value + " ");
+        travel(root.nodes);
+    }
+
+    private static void travel(ArrayList<Node1> root){
+        for(Node1 node : root){
+            System.out.print(node.value + " ");
+            travel(node.nodes);
         }
     }
 
