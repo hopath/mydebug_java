@@ -30,6 +30,7 @@ public class Code06_TreeMaxWidth {
             Node poll = nodes.poll();
             i++;
 
+
             if(poll != null){
                 nodes.add(root.left);
                 if(root.left != null){
