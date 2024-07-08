@@ -170,6 +170,7 @@ public class Code05_EncodeTreeToBinaryTree {
         return node1s;
     }
 
+
     public static void printTree(Node root){
         Queue<Node> nodes = new LinkedList<>();
         nodes.add(root);
