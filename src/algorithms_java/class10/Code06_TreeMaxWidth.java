@@ -37,6 +37,7 @@ public class Code06_TreeMaxWidth {
         root.left.right.left = new Node(8);
 
         System.out.println(getMaxWidth(root));
+
     }
     public static int getMaxWidth(Node root){
         if(root == null){
