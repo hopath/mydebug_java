@@ -57,6 +57,7 @@ public class InFollow {
                     if(root == null){
                         return null;
                     }
+
                     if(root.right != last){
                         return root;
                     }
