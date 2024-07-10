@@ -37,6 +37,7 @@ public class Code06_TreeMaxWidth {
         root.left.right.left = new Node(8);
 
         System.out.println(getMaxWidth(root));
+        System.out.println(getMaxWidth02(root));
 
     }
     public static int getMaxWidth(Node root){
@@ -73,7 +74,6 @@ public class Code06_TreeMaxWidth {
             }
         }
         int max = 0;
-        System.out.println(levels);
         for(int u = 1; u < levels.size(); u++){
             if(levels.get(u) > levels.get(max)){
                 max = u;
@@ -81,6 +81,46 @@ public class Code06_TreeMaxWidth {
         }
 
         return levels.get(max) > 1 ? levels.get(max) : 1;
+    }
+
+    public static int getMaxWidth02(Node root){
+        ArrayList<Integer> levelNums = new ArrayList<>();
+        Queue<Node> nodes = new LinkedList<>();
+        Node curEnd = null;
+        Node nextEnd =null;
+        int cnt = 1;
+        nodes.add(root);
+        curEnd = root;
+        nextEnd = root;
+
+        while(!nodes.isEmpty()){
+            Node poll = nodes.poll();
+
+            if(poll.left != null){
+                nodes.add(poll.left);
+                nextEnd = poll.left;
+            }
+            if(poll.right != null){
+                nodes.add(poll.right);
+                nextEnd = poll.right;
+            }
+
+            if(poll != curEnd){
+                cnt++;
+            }else {
+                curEnd = nextEnd;
+                levelNums.add(cnt);
+                cnt = 1;
+            }
+        }
+        int max = 0;
+        for(int u = 1; u < levelNums.size(); u++){
+            if(levelNums.get(u) > levelNums.get(max)){
+                max = u;
+            }
+        }
+
+        return levelNums.get(max);
     }
 
     public static void pre(Node root){
