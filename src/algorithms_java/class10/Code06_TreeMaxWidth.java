@@ -100,6 +100,7 @@ public class Code06_TreeMaxWidth {
                 nodes.add(poll.left);
                 nextEnd = poll.left;
             }
+
             if(poll.right != null){
                 nodes.add(poll.right);
                 nextEnd = poll.right;
