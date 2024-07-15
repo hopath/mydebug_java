@@ -155,5 +155,4 @@ public class Code04_Serialize {
 
     //Encode N-ray Tree to Binary Tree
 
-
 }

@@ -4,7 +4,7 @@ package algorithms_java.class10;
  * @author 张志伟
  * @version 1.0
  */
-public class InFollow {
+public class Code07_InFollow {
     static class Node{
         int value;
         Node left;
@@ -51,19 +51,26 @@ public class InFollow {
         if(root.value == value){
             //若该节点没有右子树，则向上找找到节点是父节点的左孩子的位置，
             if(root.right == null){
-                while(root != null){
-                    Node last = root;
-                    root = root.parent;
-                    if(root == null){
-                        return null;
-                    }
-
-                    if(root.right != last){
-                        return root;
-                    }
+//                while(root != null){
+//                    Node last = root;
+//                    root = root.parent;
+//                    if(root == null){
+//                        return null;
+//                    }
+//
+//                    if(root.right != last){
+//                        return root;
+//                    }
+//                }
+//                return null;
+                Node parent = root.parent;
+                while (parent != null && parent.right == root){
+                    root = parent;
+                    parent = root.parent;
                 }
-                return null;
+                return parent;
             }
+
             //若该节点有右子树，那么其最左节点就是其后继节点
             root = root.right;
             while (root.left != null){
