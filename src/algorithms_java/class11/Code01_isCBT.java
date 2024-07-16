@@ -34,6 +34,7 @@ public class Code01_isCBT {
 
         System.out.println(isCBT(root));
         System.out.println(isCBT1(root));
+
     }
 
     public static boolean isCBT(Node root) {
