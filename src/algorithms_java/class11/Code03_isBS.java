@@ -16,6 +16,7 @@ public class Code03_isBS {
     }
 
 
+
     static class Info {
         int maxValue;
         int minValue;
