@@ -25,7 +25,7 @@ public class Code02_isBalanced {
     }
 
     @Test
-    public void test(){
+    public void test() {
         Node root = new Node(1);
         root.left = new Node(2);
         root.right = new Node(3);
@@ -38,8 +38,8 @@ public class Code02_isBalanced {
     }
 
     //返回树的高度
-    public static int getHeight(Node root){
-        if(root == null){
+    public static int getHeight(Node root) {
+        if (root == null) {
             return 0;
         }
         int left = getHeight(root.left);
@@ -48,25 +48,25 @@ public class Code02_isBalanced {
         return Math.max(left, right) + 1;
     }
 
-    public static boolean isBalanced(Node root){
-        if(root == null){
+    public static boolean isBalanced(Node root) {
+        if (root == null) {
             return true;
         }
 
-        if(!isBalanced(root.left)){
+        if (!isBalanced(root.left)) {
             return false;
         }
-        if(!isBalanced(root.right)){
+        if (!isBalanced(root.right)) {
             return false;
         }
-        if(Math.abs(getHeight(root.left) - getHeight(root.right)) > 1){
+        if (Math.abs(getHeight(root.left) - getHeight(root.right)) > 1) {
             return false;
         }
 
         return true;
     }
 
-    static class Info{
+    static class Info {
         boolean isBalance;
         int height;
 
@@ -75,11 +75,14 @@ public class Code02_isBalanced {
             this.height = height;
         }
     }
-    public static boolean isBalanced1(Node root){
+
+    //判读数是否平衡
+    public static boolean isBalanced1(Node root) {
         return process(root).isBalance;
     }
-    public static Info process(Node root){
-        if(root == null){
+
+    public static Info process(Node root) {
+        if (root == null) {
             return new Info(true, 0);
         }
 
@@ -88,13 +91,14 @@ public class Code02_isBalanced {
 
         int height = Math.max(leftInfo.height, rightInfo.height) + 1;
         boolean isBalance = true;
-        if(leftInfo.isBalance == false){
+
+        if (leftInfo.isBalance == false) {
             isBalance = false;
         }
-        if(rightInfo.isBalance == false){
+        if (rightInfo.isBalance == false) {
             isBalance = false;
         }
-        if(Math.abs(leftInfo.height - rightInfo.height) > 1){
+        if (Math.abs(leftInfo.height - rightInfo.height) > 1) {
             isBalance = false;
         }
 
