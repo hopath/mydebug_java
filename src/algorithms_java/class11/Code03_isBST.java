@@ -140,6 +140,7 @@ public class Code03_isBST {
         return head;
     }
 
+
     public static void main(String[] args) {
         int maxLevel = 4;
         int maxValue = 100;
@@ -153,4 +154,5 @@ public class Code03_isBST {
         }
         System.out.println("finish!");
     }
+
 }
