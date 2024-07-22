@@ -15,6 +15,7 @@ public class Code03_isBST {
         }
     }
 
+
     static class Info {
         int maxValue;
         int minValue;
@@ -71,15 +72,6 @@ public class Code03_isBST {
         return new Info(maxValue, minValue, isBS);
     }
 
-    public static class Node1 {
-        public int value;
-        public Node1 left;
-        public Node1 right;
-
-        public Node1(int data) {
-            this.value = data;
-        }
-    }
 
     public static boolean isBST2(Node root){
         if(root == null){
