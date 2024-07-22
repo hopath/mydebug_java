@@ -68,7 +68,6 @@ public class Code03_isBST {
             }
         }
 
-
         return new Info(maxValue, minValue, isBS);
     }
 
