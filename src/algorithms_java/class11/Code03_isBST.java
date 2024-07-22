@@ -1,5 +1,7 @@
 package algorithms_java.class11;
 
+import org.junit.jupiter.api.Test;
+
 /**
  * @author 张志伟
  * @version 1.0
@@ -12,6 +14,13 @@ public class Code03_isBST {
 
         public Node(int value) {
             this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    '}';
         }
     }
 
@@ -26,14 +35,35 @@ public class Code03_isBST {
             this.minValue = minValue;
             this.isBS = isBS;
         }
+
+        @Override
+        public String toString() {
+            return "Info{" +
+                    "maxValue=" + maxValue +
+                    ", minValue=" + minValue +
+                    ", isBS=" + isBS +
+                    '}';
+        }
     }
 
+    @Test
+    public void test(){
+        Node node = new Node(12);
+        node.left = new Node(5);
+        node.right = new Node(15);
+        node.left.left = new Node(2);
+        node.left.right = new Node(7);
+        node.left.right.left = new Node(6);
+
+        //System.out.println(process(node).isBS);
+        System.out.println(process1(node).isBS);
+    }
     public static boolean isBST1(Node root) {
         return process(root).isBS;
     }
 
-    private static Info process(Node root){
-        if(root == null){
+    private static Info process(Node root) {
+        if (root == null) {
             return new Info(0, 0, true);
         }
 
@@ -45,26 +75,28 @@ public class Code03_isBST {
         int minValue = root.value;
         boolean isBS = true;
 
-        if(left.isBS == false){
+        if (left.isBS == false) {
             isBS = false;
         }
-        if(right.isBS == false){
+        if (right.isBS == false) {
             isBS = false;
         }
-        if(root.left != null){
-            if(root.value < left.maxValue){
+        if (root.left != null) {
+            if (root.value <= left.maxValue) {
                 isBS = false;
-            }else {
+            } else {
                 maxValue = Math.max(root.value, left.maxValue);
+                minValue = Math.min(root.value, left.minValue);
             }
         }
 
-        if(root.right != null){
+        if (root.right != null) {
             //既要判断左树小于root同时要保证root大于左树的最小值
-            if(root.value > right.minValue){
+            if (root.value >= right.minValue) {
                 isBS = false;
-            }else {
-                minValue = Math.max(root.value, right.minValue);
+            } else {
+                minValue = Math.min(minValue, right.minValue);
+                maxValue = Math.max(maxValue, right.maxValue);
             }
         }
 
@@ -72,45 +104,44 @@ public class Code03_isBST {
     }
 
 
-
-    public static boolean isBST2(Node root){
-        if(root == null){
+    public static boolean isBST2(Node root) {
+        if (root == null) {
             return true;
         }
         return process1(root).isBS;
     }
 
-    private static Info process1(Node root){
-        if(root == null){
+    private static Info process1(Node root) {
+        if (root == null) {
             return null;
         }
         Info left = process1(root.left);
-        Info right = process(root.right);
+        Info right = process1(root.right);
 
         boolean isBS = true;
         int max = root.value;
         int min = root.value;
 
-        if(left != null && !left.isBS){
+        if (left != null && !left.isBS) {
             isBS = false;
         }
-        if(right != null && !right.isBS){
+        if (right != null && !right.isBS) {
             isBS = false;
         }
 
-        if(left != null){
+        if (left != null) {
             max = Math.max(root.value, left.maxValue);
             min = Math.min(root.value, left.minValue);
         }
-        if(right != null){
-            min = Math.min(root.value, right.minValue);
-            max = Math.max(root.value, right.maxValue);
+        if (right != null) {
+            min = Math.min(min, right.minValue);
+            max = Math.max(max, right.maxValue);
         }
 
-        if(left != null && root.value <= left.maxValue){
+        if (left != null && root.value <= left.maxValue) {
             isBS = false;
         }
-        if(right != null && root.value >= right.minValue){
+        if (right != null && root.value >= right.minValue) {
             isBS = false;
         }
 
@@ -140,6 +171,7 @@ public class Code03_isBST {
         for (int i = 0; i < testTimes; i++) {
             Node head = generateRandomBST(maxLevel, maxValue);
             if (isBST1(head) != isBST2(head)) {
+                pre(head);
                 System.out.println("Oops!");
                 return;
             }
@@ -147,4 +179,13 @@ public class Code03_isBST {
         System.out.println("finish!");
     }
 
+    public static void pre(Node root){
+        if(root == null){
+            return;
+        }
+        System.out.print(root.value + " ");
+        pre(root.left);
+        pre(root.right);
+    }
 }
+
