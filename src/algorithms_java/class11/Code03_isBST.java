@@ -148,6 +148,7 @@ public class Code03_isBST {
         return new Info(max, min, isBS);
     }
 
+
     public static Node generateRandomBST(int maxLevel, int maxValue) {
         return generate(1, maxLevel, maxValue);
     }
