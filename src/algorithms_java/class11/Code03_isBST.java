@@ -72,6 +72,7 @@ public class Code03_isBST {
     }
 
 
+
     public static boolean isBST2(Node root){
         if(root == null){
             return true;
