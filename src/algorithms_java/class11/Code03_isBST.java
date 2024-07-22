@@ -28,7 +28,6 @@ public class Code03_isBST {
         }
     }
 
-
     public static boolean isBST1(Node root) {
         return process(root).isBS;
     }
