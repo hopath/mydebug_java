@@ -52,5 +52,7 @@ public class Code04_getMaxDistance {
         int maxDistance = Math.max(Math.max(p1, p2), p3);
 
         return new Info(high, maxDistance);
+
+
     }
 }
