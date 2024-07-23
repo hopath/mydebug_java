@@ -53,6 +53,5 @@ public class Code04_getMaxDistance {
 
         return new Info(high, maxDistance);
 
-
     }
 }
