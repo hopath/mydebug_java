@@ -85,6 +85,7 @@ public class Code03_isBST {
             if (root.value <= left.maxValue) {
                 isBS = false;
             } else {
+                //返回时综合左右子树最大最小值
                 maxValue = Math.max(root.value, left.maxValue);
                 minValue = Math.min(root.value, left.minValue);
             }
