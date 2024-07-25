@@ -191,6 +191,7 @@ public class Code06_MaxSubBSTSize {
             min = Math.min(rightInfo.min, min);
             allSize += rightInfo.allSize;
         }
+
         int p1 = -1;
         if (leftInfo != null) {
             p1 = leftInfo.maxBSTSubtreeSize;
