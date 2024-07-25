@@ -220,11 +220,6 @@ public class Code06_MaxSubBSTSize {
 
 
 
-
-
-
-
-
     public static void main(String[] args) {
         int maxLevel = 4;
         int maxValue = 100;
