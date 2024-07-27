@@ -58,6 +58,8 @@ public class Code03_isBST {
         //System.out.println(process(node).isBS);
         System.out.println(process1(node).isBS);
     }
+
+    //判读是否是二叉搜索树
     public static boolean isBST1(Node root) {
         return process(root).isBS;
     }

@@ -37,6 +37,7 @@ public class Code01_isCBT {
 
     }
 
+    //判断是否是完全二叉树
     public static boolean isCBT(Node root) {
         if (root == null) {
             return true;

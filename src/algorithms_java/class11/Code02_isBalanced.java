@@ -76,7 +76,7 @@ public class Code02_isBalanced {
         }
     }
 
-    //判读数是否平衡
+    //判读是否是平衡二叉树
     public static boolean isBalanced1(Node root) {
         return process(root).isBalance;
     }
