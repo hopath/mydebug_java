@@ -114,8 +114,6 @@ public class Code07_RisCBT {
 
 
 
-
-
     // for test
     public static Node generateRandomBST(int maxLevel, int maxValue) {
         return generate(1, maxLevel, maxValue);
