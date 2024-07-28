@@ -62,6 +62,7 @@ public class Code08_MinParent {
             return right;
         }
 
+
         boolean isCNode = false;
 
         if (left.isCNode && right.isCNode || left.isCNode && (root.value == a.value ||
