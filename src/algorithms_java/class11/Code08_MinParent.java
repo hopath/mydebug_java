@@ -62,21 +62,12 @@ public class Code08_MinParent {
             return right;
         }
 
-
-
         boolean isCNode = false;
 
-
-        if (left.isCNode && right.isCNode || left.isCNode && (root.value == a.value ||
-                root.value == b.value) || right.isCNode && (root.value == a.value || root
-                .value == b.value)) {
-            return new Info(false, root);
-        }
-
-        if(left.isCNode == true){
+        if (left.isCNode == true) {
             isCNode = true;
         }
-        if(right.isCNode == true){
+        if (right.isCNode == true) {
             isCNode = true;
         }
 
@@ -85,6 +76,13 @@ public class Code08_MinParent {
         }
         if (root.value == b.value) {
             isCNode = true;
+        }
+
+
+        if (left.isCNode && right.isCNode || left.isCNode && (root.value == a.value ||
+                root.value == b.value) || right.isCNode && (root.value == a.value || root
+                .value == b.value)) {
+            return new Info(false, root);
         }
 
         return new Info(isCNode, null);
@@ -181,19 +179,30 @@ public class Code08_MinParent {
 
     @Test
     public void test() {
-        Node node = new Node(23);
-        node.left = new Node(66);
-        node.left.right = new Node(69);
-        node.left.right.right = new Node(0);
-
-        Node res = getMinNode(node, new Node(0), new Node(66));
-        System.out.println(res);
+//        Node node = new Node(43);
+//        node.left = new Node(85);
+//        node.left.right = new Node(60);
+//        node.right = new Node(43);
+//        node.right.left = new Node(69);
+//        node.right.right = new Node(88);
+//        node.right.right.right = new Node(16);
+//        node.right.right.right.right = new Node(36);
+//        node.right.right.right.right.right = new Node(34);
+        Node node = new Node(79);
+        node.right = new Node(66);
+        node.right.right = new Node(79);
+//        pre(node);
+//        System.out.println();
+//        in(node);
+        Node res1 = getMinNode(node, new Node(66), new Node(79));
+        Node res2 = lowestAncestor1(node, new Node(66), new Node(79));
+        System.out.println(res1 + " " + res2);
     }
 
     public static void main(String[] args) {
-        int maxLevel = 4;
+        int maxLevel = 3;
         int maxValue = 100;
-        int testTimes = 1000000;
+        int testTimes = 100;
         for (int i = 0; i < testTimes; i++) {
             Node head = generateRandomBST(maxLevel, maxValue);
             Node o1 = pickRandomOne(head);
@@ -205,7 +214,6 @@ public class Code08_MinParent {
                 System.out.println();
                 System.out.println(o1.value + " " + o2.value);
                 System.out.println("Oops!");
-                return;
             }
         }
         System.out.println("finish!");
