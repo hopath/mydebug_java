@@ -23,6 +23,7 @@ public class Code09_MaxHappy {
         }
 
         int childSum  = 0;
+
         for(int i = 0; i < root.next.size(); i++){
             int max  = getMaxHappy(root.next.get(i));
             childSum += max;
