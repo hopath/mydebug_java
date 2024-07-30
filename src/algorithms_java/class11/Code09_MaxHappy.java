@@ -100,6 +100,8 @@ public class Code09_MaxHappy {
         return new Info(no, yes);
     }
 
+
+
     // for test
     public static Employee genarateBoss(int maxLevel, int maxNexts, int maxHappy) {
         if (Math.random() < 0.02) {
