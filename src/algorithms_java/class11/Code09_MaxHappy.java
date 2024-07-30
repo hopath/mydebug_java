@@ -125,6 +125,8 @@ public class Code09_MaxHappy {
         }
     }
 
+
+
     public static void main(String[] args) {
         int maxLevel = 4;
         int maxNexts = 7;
