@@ -9,6 +9,7 @@ import java.util.*;
  * @author 张志伟
  * @version 1.0
  */
+//找包括a, b的公共节点
 public class Code08_MinParent {
     static class Node {
         int value;
@@ -37,6 +38,20 @@ public class Code08_MinParent {
         }
     }
 
+
+    static class Info1 {
+        boolean findA;
+        boolean findB;
+        Node res;
+
+        public Info1(boolean findA, boolean findB, Node res) {
+            this.findA = findA;
+            this.findB = findB;
+            this.res = res;
+        }
+    }
+
+    //当树中有相同元素时会出问题，例如a, b在同一个节点
     public static Node getMinNode(Node root, Node a, Node b) {
         if (root == null) {
             return null;
@@ -88,6 +103,35 @@ public class Code08_MinParent {
         return new Info(isCNode, null);
     }
 
+    public static Node getMinParentNode02(Node root, Node a, Node b) {
+        return process01(root, a, b).res;
+    }
+
+    public static Info1 process01(Node root, Node a, Node b) {
+        if (root == null) {
+            return new Info1(false, false, null);
+        }
+
+        Info1 left = process01(root.left, a, b);
+        if (left.res != null) {
+            return left;
+        }
+        Info1 right = process01(root.right, a, b);
+        if (right.res != null) {
+            return right;
+        }
+
+        boolean findA = root == a || left.findA || right.findA;
+        boolean findB = root == b || left.findB || right.findB;
+
+        if (findA && findB) {
+            return new Info1(true, true, root);
+        }
+
+        return new Info1(findA, findB, null);
+    }
+
+
     public static Node lowestAncestor1(Node head, Node o1, Node o2) {
         if (head == null) {
             return null;
@@ -109,6 +153,44 @@ public class Code08_MinParent {
         }
         return cur;
     }
+
+    public static Node lowestAncestor2(Node head, Node a, Node b) {
+        return process02(head, a, b).ans;
+    }
+
+    public static class Info3 {
+        public boolean findA;
+        public boolean findB;
+        public Node ans;
+
+        public Info3(boolean fA, boolean fB, Node an) {
+            findA = fA;
+            findB = fB;
+            ans = an;
+        }
+    }
+
+    public static Info3 process02(Node x, Node a, Node b) {
+        if (x == null) {
+            return new Info3(false, false, null);
+        }
+        Info3 leftInfo = process02(x.left, a, b);
+        Info3 rightInfo = process02(x.right, a, b);
+        boolean findA = (x == a) || leftInfo.findA || rightInfo.findA;
+        boolean findB = (x == b) || leftInfo.findB || rightInfo.findB;
+        Node ans = null;
+        if (leftInfo.ans != null) {
+            ans = leftInfo.ans;
+        } else if (rightInfo.ans != null) {
+            ans = rightInfo.ans;
+        } else {
+            if (findA && findB) {
+                ans = x;
+            }
+        }
+        return new Info3(findA, findB, ans);
+    }
+
 
     public static void fillParentMap(Node head, HashMap<Node, Node> parentMap) {
         if (head.left != null) {
@@ -159,6 +241,7 @@ public class Code08_MinParent {
     }
 
 
+
     public static void pre(Node root) {
         if (root == null) {
             return;
@@ -172,9 +255,9 @@ public class Code08_MinParent {
         if (root == null) {
             return;
         }
-        pre(root.left);
+        in(root.left);
         System.out.print(root.value + " ");
-        pre(root.right);
+        in(root.right);
     }
 
     @Test
@@ -188,34 +271,33 @@ public class Code08_MinParent {
 //        node.right.right.right = new Node(16);
 //        node.right.right.right.right = new Node(36);
 //        node.right.right.right.right.right = new Node(34);
-        Node node = new Node(79);
-        node.right = new Node(66);
-        node.right.right = new Node(79);
-//        pre(node);
-//        System.out.println();
-//        in(node);
-        Node res1 = getMinNode(node, new Node(66), new Node(79));
-        Node res2 = lowestAncestor1(node, new Node(66), new Node(79));
-        System.out.println(res1 + " " + res2);
+        Node node = new Node(2);
+        node.right = new Node(27);
+        node.right.left = new Node(29);
+        node.right.right = new Node(2);
+        pre(node);
+        System.out.println();
+        in(node);
+//        Node res1 = getMinParentNode02(node, new Node(2), new Node(29));
+        Node res2 = lowestAncestor2(node, new Node(2), new Node(29));
+//        System.out.println(res1 + " " + res2);
     }
 
     public static void main(String[] args) {
         int maxLevel = 3;
         int maxValue = 100;
-        int testTimes = 100;
+        int testTimes = 100000;
         for (int i = 0; i < testTimes; i++) {
             Node head = generateRandomBST(maxLevel, maxValue);
             Node o1 = pickRandomOne(head);
             Node o2 = pickRandomOne(head);
-            if (lowestAncestor1(head, o1, o2) != getMinNode(head, o1, o2)) {
-                pre(head);
-                System.out.println();
-                in(head);
-                System.out.println();
-                System.out.println(o1.value + " " + o2.value);
+            Node minParentNode02 = lowestAncestor1(head, o1, o2);
+            if ( minParentNode02 != getMinParentNode02(head, o1, o2)) {
+                System.out.println(minParentNode02);
                 System.out.println("Oops!");
             }
         }
         System.out.println("finish!");
+
     }
 }
