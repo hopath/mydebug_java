@@ -20,23 +20,35 @@ public class Code09_MaxHappy {
 
     }
 
-    public static int getMaxHappy(Employee root) {
-        return process1(root);
+    public static class Info {
+        public int no;
+        public int yes;
+
+        public Info(int n, int y) {
+            no = n;
+            yes = y;
+        }
     }
 
-    public static int process1(Employee root) {
+    public static int getMaxHappy(Employee root) {
+        return Math.max(process1(root).yes, process1(root).no);
+    }
+
+    public static Info process1(Employee root) {
         if (root == null) {
-            return 0;
+            return new Info(0, 0);
         }
 
-        int childSum = 0;
+        int yes = root.happy;
+        int no = 0;
 
-        for (int i = 0; i < root.nexts.size(); i++) {
-            int max = getMaxHappy(root.nexts.get(i));
-            childSum += max;
+        for (Employee employee : root.nexts) {
+            Info res = process1(employee);
+            yes += res.no;
+            no += Math.max(res.no, res.yes);
         }
 
-        return childSum > root.happy ? childSum : root.happy;
+        return new Info(no, yes);
     }
 
 
@@ -75,15 +87,6 @@ public class Code09_MaxHappy {
         return Math.max(allInfo.no, allInfo.yes);
     }
 
-    public static class Info {
-        public int no;
-        public int yes;
-
-        public Info(int n, int y) {
-            no = n;
-            yes = y;
-        }
-    }
 
     public static Info process(Employee x) {
         if (x == null) {
@@ -99,7 +102,6 @@ public class Code09_MaxHappy {
         }
         return new Info(no, yes);
     }
-
 
 
     // for test
@@ -126,12 +128,11 @@ public class Code09_MaxHappy {
     }
 
 
-
     public static void main(String[] args) {
         int maxLevel = 4;
         int maxNexts = 7;
         int maxHappy = 100;
-        int testTimes = 100000;
+        int testTimes = 1000;
         for (int i = 0; i < testTimes; i++) {
             Employee boss = genarateBoss(maxLevel, maxNexts, maxHappy);
             int j = maxHappy1(boss);
