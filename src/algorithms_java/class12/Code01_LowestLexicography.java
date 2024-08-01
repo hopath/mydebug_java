@@ -80,6 +80,7 @@ public class Code01_LowestLexicography {
     }
 
 
+
     public static String generateRandomString(int strLen) {
         char[] ans = new char[(int) (Math.random() * strLen) + 1];
         for (int i = 0; i < ans.length; i++) {
