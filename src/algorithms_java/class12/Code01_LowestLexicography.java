@@ -63,6 +63,7 @@ public class Code01_LowestLexicography {
         得到的字符数组拼接而成就是最小字典序
      */
 
+
     public static String lowestLexicography02(String[] strs) {
         if (strs == null || strs.length == 0) {
             return "";
