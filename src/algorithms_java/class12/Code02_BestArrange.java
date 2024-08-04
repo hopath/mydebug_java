@@ -40,6 +40,7 @@ public class Code02_BestArrange {
             return done;
         }
 
+
         //若后续会议都安排不了，最大值就是已经安排的会议数
         int max = done;
 
