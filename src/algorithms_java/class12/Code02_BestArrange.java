@@ -44,23 +44,25 @@ public class Code02_BestArrange {
         int max = done;
 
         for(int i = 0; i < nodes.length; i++){
-            if(nodes[i].start >= timeLine){
-                Node[] next = removeIndexNode(nodes, i);
+            if (nodes[i].start >= timeLine) {
+                Node[] next = copyButExcept(nodes, i);
                 max = Math.max(max, process(next, done + 1, nodes[i].end));
             }
         }
+
         return max;
     }
 
 
-    public static Node[] removeIndexNode(Node[] time, int i) {
-        ArrayList<Node> res = new ArrayList<>();
-        for (int j = 0; j < time.length; j++) {
-            if (j != i) {
-                res.add(time[j]);
+    public static Node[] copyButExcept(Node[] programs, int i) {
+        Node[] ans = new Node[programs.length - 1];
+        int index = 0;
+        for (int k = 0; k < programs.length; k++) {
+            if (k != i) {
+                ans[index++] = programs[k];
             }
         }
-        return (Node[])res.toArray();
+        return ans;
     }
 
 
@@ -89,5 +91,33 @@ public class Code02_BestArrange {
         }
 
         return time;
+    }
+
+    // for test
+    public static Node[] generatePrograms(int programSize, int timeMax) {
+        Node[] ans = new Node[(int) (Math.random() * (programSize + 1))];
+        for (int i = 0; i < ans.length; i++) {
+            int r1 = (int) (Math.random() * (timeMax + 1));
+            int r2 = (int) (Math.random() * (timeMax + 1));
+            if (r1 == r2) {
+                ans[i] = new Node(r1, r1 + 1);
+            } else {
+                ans[i] = new Node(Math.min(r1, r2), Math.max(r1, r2));
+            }
+        }
+        return ans;
+    }
+
+    public static void main(String[] args) {
+        int programSize = 12;
+        int timeMax = 20;
+        int timeTimes = 1000000;
+        for (int i = 0; i < timeTimes; i++) {
+            Node[] programs = generatePrograms(programSize, timeMax);
+            if (getBestArrange01(programs) != getBestArrange02(programs)) {
+                System.out.println("Oops!");
+            }
+        }
+        System.out.println("finish!");
     }
 }
