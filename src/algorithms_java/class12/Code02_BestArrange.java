@@ -1,6 +1,5 @@
 package algorithms_java.class12;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
@@ -8,7 +7,12 @@ import java.util.Comparator;
  * @author 张志伟
  * @version 1.0
  */
-//会议时间安排最佳
+/*
+一些项目要占用一个会议室宣讲,会议室不能同时容纳两个项目的宣讲。
+给你每一个项目开始的时间和结束的时间
+你来安排宣讲的日程,要求会议室进行的宣讲的场次最多。
+返回最多的宣讲场次。
+ */
 public class Code02_BestArrange {
 
     static class Node {
@@ -35,12 +39,20 @@ public class Code02_BestArrange {
     }
 
 
+    /**
+     *
+     *返回能安排会议数量的最大值
+     * @param nodes 还剩下多少回会议
+     * @param done 之前已经安排多少会议了
+     * @param timeLine 目前来到的时间点
+     * @return
+     */
+
     public static int process(Node[] nodes, int done, int timeLine){
         if(nodes.length == 0){
             return done;
         }
 
-        //若后续会议都安排不了，最大值就是已经安排的会议数
         int max = done;
 
         for(int i = 0; i < nodes.length; i++){

@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * @author 张志伟
  * @version 1.0
  */
+//全排列
 public class Code03_AllSort {
 
     public static void main(String[] args) {
