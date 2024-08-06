@@ -41,6 +41,8 @@ public class Code04_LessMoneySplitGold {
             min += p;
             heap.add(p);
         }
+
+
         return min;
     }
 
