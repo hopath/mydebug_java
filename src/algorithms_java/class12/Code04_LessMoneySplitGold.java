@@ -6,6 +6,7 @@ import java.util.PriorityQueue;
  * @author 张志伟
  * @version 1.0
  */
+
 /*
 一块金条切成两半,是需要花费和长度数值一样的铜板的。
 比如长度为20的金条,不管怎么切,都要花费20个铜板。一群人想整分整块金条,怎么分最省铜板?
@@ -42,4 +43,6 @@ public class Code04_LessMoneySplitGold {
         }
         return min;
     }
+
+
 }
