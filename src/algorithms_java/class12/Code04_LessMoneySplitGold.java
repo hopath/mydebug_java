@@ -1,5 +1,6 @@
 package algorithms_java.class12;
 
+import java.util.Arrays;
 import java.util.PriorityQueue;
 
 /**
@@ -20,21 +21,52 @@ import java.util.PriorityQueue;
  */
 public class Code04_LessMoneySplitGold {
 
-    public int getLessMoneySplitGold(int[] arr) {
+    public static int getLessMoneySplitGold01(int[] arr) {
         if(arr.length == 1){
             return arr[0];
         }
-        if(arr == null){
+
+        int min = Integer.MAX_VALUE;
+
+        for(int i = 0; i < arr.length; i++){
+            for(int j = i + 1; j < arr.length; j++){
+                int[] next = TowMergeToOne(arr, i, j);
+                int lastMoney = getLessMoneySplitGold01(next);
+                min = Math.min(min, arr[i] + arr[j] + lastMoney);
+            }
+        }
+        return min;
+    }
+
+    public static int[] TowMergeToOne(int[] arr, int i, int j){
+        int ans[] = new int[arr.length - 1];
+        int p = 0;
+        for(int k = 0; k < arr.length; k++){
+            if(k != i && k != j){
+                ans[p] = arr[k];
+                p++;
+            }
+        }
+        ans[p] = arr[i] + arr[j];
+
+        return ans;
+    }
+
+    public static int getLessMoneySplitGold02(int[] arr) {
+        if (arr.length == 1) {
+            return arr[0];
+        }
+        if (arr == null) {
             return 0;
         }
 
         int min = 0, p = 0;
         PriorityQueue<Integer> heap = new PriorityQueue<>();
-        for(int i = 0; i < arr.length; i++){
+        for (int i = 0; i < arr.length; i++) {
             heap.add(arr[i]);
         }
 
-        while(heap.size() > 1){
+        while (heap.size() > 1) {
             Integer p1 = heap.poll();
             Integer p2 = heap.poll();
             p = p1 + p2;
@@ -42,9 +74,34 @@ public class Code04_LessMoneySplitGold {
             heap.add(p);
         }
 
-
         return min;
     }
 
+
+    // for test
+    public static int[] generateRandomArray(int maxSize, int maxValue) {
+        int[] arr = new int[(int) ((maxSize + 1) * Math.random())];
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = (int) (Math.random() * (maxValue + 1));
+        }
+        return arr;
+    }
+
+    public static void main(String[] args) {
+        int testTime = 100000;
+        int maxSize = 6;
+        int maxValue = 1000;
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = generateRandomArray(maxSize, maxValue);
+            for(int k = 0; k < arr.length; k++){
+                System.out.print(arr[k] + " ");
+            }
+            System.out.println();
+            if (getLessMoneySplitGold01(arr) != getLessMoneySplitGold02(arr)) {
+                System.out.println("Oops!");
+            }
+        }
+        System.out.println("finish!");
+    }
 
 }
