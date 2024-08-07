@@ -35,6 +35,9 @@ public class Code04_LessMoneySplitGold {
                 min = Math.min(min, arr[i] + arr[j] + lastMoney);
             }
         }
+
+
+
         return min;
     }
 
