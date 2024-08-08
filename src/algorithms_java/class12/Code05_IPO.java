@@ -37,6 +37,7 @@ public class Code05_IPO {
         }
     }
 
+
     public static int findMaximizedCapital(int K, int W, int[] costs, int[] profits) {
         PriorityQueue<Node> minCostQ = new PriorityQueue<>(new MinCostComparator());
         PriorityQueue<Node> maxProfitQ = new PriorityQueue<>(new MaxProfitComparator());
