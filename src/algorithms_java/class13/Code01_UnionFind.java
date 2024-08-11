@@ -57,7 +57,6 @@ public class Code01_UnionFind {
         }
 
 
-
         public boolean isSameSet(V a, V b) {
             Node<V> node1 = findFatherNode(a);
             Node<V> node2 = findFatherNode(b);
@@ -70,7 +69,7 @@ public class Code01_UnionFind {
             Node<V> f1 = findFatherNode(a);
             Node<V> f2 = findFatherNode(b);
 
-            if(f1 != f2){
+            if (f1 != f2) {
                 Integer s1 = sizeMap.get(f1);
                 Integer s2 = sizeMap.get(f2);
 
@@ -82,6 +81,59 @@ public class Code01_UnionFind {
                 sizeMap.remove(small);
             }
         }
+
+        public int getParentSize() {
+            return sizeMap.size();
+        }
     }
 
+    static class UnionFind01 {
+        private int[] parent;
+        private int[] size;
+        private int[] help;
+        private int sites;
+
+        public UnionFind01(int N) {
+            parent = new int[N];
+            size = new int[N];
+            help = new int[N];
+            sites = N;
+
+            for (int i = 0; i < N; i++) {
+                parent[i] = i;
+                size[i] = 1;
+            }
+        }
+
+        public int find(int i) {
+            int p = 0;
+            while (parent[i] != i) {
+                help[p++] = i;
+                i = parent[i];
+            }
+
+            for(p--; p >= 0; p--){
+                parent[help[p]] = i;
+            }
+
+            return i;
+        }
+
+        public void union(int i, int j) {
+            int p1 = find(i);
+            int p2 = find(j);
+
+            if(p1 != p2){
+                int large = size[p1] > size[p2] ? p1 : p2;
+                int small = large == p1 ? p2 : p1;
+                parent[small] = large;
+                size[large] = size[p1] + size[p2];
+                sites--;
+            }
+        }
+
+        public int sites(){
+            return sites;
+        }
+    }
 }
