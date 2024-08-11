@@ -24,7 +24,6 @@ public class Code03_NumberOfIslands {
         if(i < 0 || i > board.length - 1 || j < 0 || j > board[0].length - 1 || board[i][j] != '1'){
             return;
         }
-
         board[i][j] = '2';
         infect(board, i - 1, j);
         infect(board, i + 1, j);
