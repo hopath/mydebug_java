@@ -1,6 +1,5 @@
 package algorithms_java.class13;
 
-import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.List;
@@ -82,7 +81,7 @@ public class Code01_UnionFind {
             }
         }
 
-        public int getParentSize() {
+        public int size() {
             return sizeMap.size();
         }
     }
