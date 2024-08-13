@@ -25,6 +25,6 @@ public class Code02_FriendCircles {
             }
         }
 
-        return unionFind.getParentSize();
+        return unionFind.size();
     }
 }

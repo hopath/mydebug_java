@@ -77,7 +77,7 @@ public class Code01_UnionFind {
                 Node<V> large = s1 > s2 ? f1 : f2;
                 Node<V> small = large == f1 ? f2 : f1;
 
-                parentMap.put(large, small);
+                parentMap.put(small, large);
                 sizeMap.put(large, s1 + s2);
                 sizeMap.remove(small);
             }
