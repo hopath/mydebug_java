@@ -18,6 +18,8 @@ public class Code04_NumberOfIslandsII {
             }
         }
 
+
+
         for(int i = 0; i < positions.length; i++){
             board[positions[i][1]][positions[i][2]] = '1';
             int numberOfIslands02 = Code03_NumberOfIslands.getNumberOfIslands02(board);
