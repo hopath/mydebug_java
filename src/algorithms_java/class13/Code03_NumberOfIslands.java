@@ -102,25 +102,25 @@ public class Code03_NumberOfIslands {
 
         for (int i = 1; i < r; i++) {
             if (board[i - 1][0] == '1' && board[i][0] == '1') {
-                unionFind.union(getIndex(i - 1, 0), getIndex(i, 0));
+                unionFind.union(getIndex(i - 1, 0, c), getIndex(i, 0, c));
             }
         }
 
         for (int i = 1; i < c; i++) {
             if (board[0][i - 1] == '1' && board[0][i] == '1') {
-                unionFind.union(getIndex(0, i - 1), getIndex(0, i));
+                unionFind.union(getIndex(0, i - 1, c), getIndex(0, i, c));
             }
         }
 
         for (int i = 1; i < r; i++) {
             for (int j = 1; j < c; j++) {
                 if (board[i][j] == '1') {
-                    int index = getIndex(i, j);
+                    int index = getIndex(i, j, c);
                     if (board[i - 1][j] == '1') {
-                        unionFind.union(index, getIndex(i - 1, j));
+                        unionFind.union(index, getIndex(i - 1, j, c));
                     }
                     if (board[i][j - 1] == '1') {
-                        unionFind.union(index, getIndex(i, j - 1));
+                        unionFind.union(index, getIndex(i, j - 1, c));
                     }
                 }
             }
@@ -129,8 +129,8 @@ public class Code03_NumberOfIslands {
         return unionFind.sites;
     }
 
-    private static int getIndex(int r, int c) {
-        return r * c + c;
+    private static int getIndex(int r, int c, int N) {
+        return r * N + c;
     }
 
     static class UnionFind {
@@ -142,7 +142,6 @@ public class Code03_NumberOfIslands {
         public UnionFind(char arr[][], int N) {
             int r = arr.length;
             int c = arr[0].length;
-
             parent = new int[N];
             size = new int[N];
             help = new int[N];
@@ -151,7 +150,7 @@ public class Code03_NumberOfIslands {
             for (int i = 0; i < r; i++) {
                 for (int j = 0; j < c; j++) {
                     if (arr[i][j] == '1') {
-                        int index = getIndex(i, j);
+                        int index = getIndex(i, j, c);
                         parent[index] = index;
                         size[index] = 1;
                         sites++;
