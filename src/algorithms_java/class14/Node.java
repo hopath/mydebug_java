@@ -20,5 +20,4 @@ public class Node {
         nexts = new ArrayList<>();
         edges = new ArrayList<>();
     }
-
 }
