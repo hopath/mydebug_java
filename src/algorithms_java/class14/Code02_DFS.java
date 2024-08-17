@@ -6,6 +6,4 @@ package algorithms_java.class14;
  */
 public class Code02_DFS {
 
-
-
 }
