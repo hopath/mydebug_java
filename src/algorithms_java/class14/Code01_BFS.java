@@ -24,7 +24,7 @@ public class Code01_BFS {
         node2.nexts.add(node4);
         node4.nexts.add(node3);
 
-        bfs(node1);
+       Code02_DFS.dfs(node1);
     }
 
     public void bfs(Node node) {
