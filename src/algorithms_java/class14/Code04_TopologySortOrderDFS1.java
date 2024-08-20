@@ -40,6 +40,8 @@ public class Code04_TopologySortOrderDFS1 {
             num = nextMap.get(next) + 1;
         }
 
+
+
         res.put(node, num);
 
         return res;
