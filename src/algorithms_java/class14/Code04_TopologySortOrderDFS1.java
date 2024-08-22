@@ -1,9 +1,8 @@
 package algorithms_java.class14;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
+import java.util.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author 张志伟
@@ -22,6 +21,65 @@ public class Code04_TopologySortOrderDFS1 {
         }
     }
 
+    static class Record {
+        int value;
+        DirectedGraphNode node;
+
+        public Record(DirectedGraphNode node, int value) {
+            this.node = node;
+            this.value = value;
+        }
+    }
+
+    private class MyComparator implements Comparator<Record> {
+
+        @Override
+        public int compare(Record o1, Record o2) {
+            return o2.value - o1.value;
+        }
+    }
+
+    public ArrayList<DirectedGraphNode> topSort(ArrayList<DirectedGraphNode> graph) {
+        HashMap<DirectedGraphNode, Record> recordHashMap = new HashMap<>();
+
+        for (DirectedGraphNode node : graph) {
+            f(node, recordHashMap);
+        }
+
+        ArrayList<Record> records = new ArrayList<>();
+        for (Record r : recordHashMap.values()) {
+            records.add(r);
+        }
+
+        ArrayList<DirectedGraphNode> res = new ArrayList<>();
+
+        records.sort(new MyComparator());
+
+        for (Record cur : records) {
+            res.add(cur.node);
+        }
+
+        return res;
+    }
+
+    public static Record f(DirectedGraphNode node, HashMap<DirectedGraphNode, Record> recordHashMap) {
+        if (recordHashMap.containsKey(node)) {
+            return recordHashMap.get(node);
+        }
+
+        int num = 0;
+
+        for (DirectedGraphNode next : node.neighbors) {
+            num += f(next, recordHashMap).value;
+        }
+
+        Record ans = new Record(node, num + 1);
+        recordHashMap.put(node, ans);
+
+        return ans;
+    }
+
+
     public static HashMap<DirectedGraphNode, Integer> record(DirectedGraphNode node, HashMap<DirectedGraphNode, Integer> res) {
         if (node.neighbors == null) {
             res.put(node, 1);
@@ -31,16 +89,8 @@ public class Code04_TopologySortOrderDFS1 {
         int num = 0;
         for (DirectedGraphNode next : node.neighbors) {
             HashMap<DirectedGraphNode, Integer> nextMap = record(next, res);
-            //把已经算出的数量拷贝到上一层Hash表中
-            Set<DirectedGraphNode> directedGraphNodes = nextMap.keySet();
-            for(DirectedGraphNode cur : directedGraphNodes){
-                res.put(cur, nextMap.get(cur));
-            }
-
             num = nextMap.get(next) + 1;
         }
-
-
 
         res.put(node, num);
 
