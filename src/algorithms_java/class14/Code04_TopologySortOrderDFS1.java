@@ -22,10 +22,10 @@ public class Code04_TopologySortOrderDFS1 {
     }
 
     static class Record {
-        int value;
+        long value;
         DirectedGraphNode node;
 
-        public Record(DirectedGraphNode node, int value) {
+        public Record(DirectedGraphNode node, long value) {
             this.node = node;
             this.value = value;
         }
@@ -35,7 +35,7 @@ public class Code04_TopologySortOrderDFS1 {
 
         @Override
         public int compare(Record o1, Record o2) {
-            return o2.value - o1.value;
+            return o1.value == o2.value ? 0 : (o1.value > o2.value) ? -1 : 1;
         }
     }
 
@@ -67,7 +67,7 @@ public class Code04_TopologySortOrderDFS1 {
             return recordHashMap.get(node);
         }
 
-        int num = 0;
+        long num = 0;
 
         for (DirectedGraphNode next : node.neighbors) {
             num += f(next, recordHashMap).value;
