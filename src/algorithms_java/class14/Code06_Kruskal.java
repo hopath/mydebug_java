@@ -6,4 +6,5 @@ package algorithms_java.class14;
  */
 public class Code06_Kruskal {
 
+
 }
