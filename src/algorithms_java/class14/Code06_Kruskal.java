@@ -69,6 +69,7 @@ public class Code06_Kruskal {
         PriorityQueue<Edge> heap = new PriorityQueue<>(new EdgeComparator());
         List<Edge> res = new ArrayList<>();
 
+
         for (Edge edge : graph.edges) {
             heap.add(edge);
         }
