@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class Code08_Dijkstra {
     public static List<Edge> dijkstra(Graph graph) {
-
-
         return null;
     }
 
