@@ -43,6 +43,7 @@ public class Code08_Dijkstra {
                     hashMap.put(to, Math.min(hashMap.get(to), distance + edge.weight));
                 }
             }
+
             set.add(minNode);
             minNode = getMinNodeExceptSet(hashMap, set);
         }
