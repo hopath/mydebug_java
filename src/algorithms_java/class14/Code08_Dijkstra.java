@@ -88,6 +88,7 @@ public class Code08_Dijkstra {
             tNode pop = heapGreater.pop();
             int distance = pop.distance;
 
+
             for (Edge edge : pop.node.edges) {
 
             }
