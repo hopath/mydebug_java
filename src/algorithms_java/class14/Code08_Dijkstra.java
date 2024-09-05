@@ -1,5 +1,7 @@
 package algorithms_java.class14;
 
+import algorithms_java.class08.Code02_HeapGreater;
+
 import java.util.*;
 
 /**
@@ -49,6 +51,47 @@ public class Code08_Dijkstra {
         }
 
         return hashMap;
+    }
+
+    static class tNode {
+        Node node;
+        int distance;
+
+        public tNode() {
+        }
+
+        public tNode(Node node, int distance) {
+            this.node = node;
+            this.distance = distance;
+        }
+    }
+
+    static class MyComparator implements Comparator<tNode> {
+
+        @Override
+        public int compare(tNode o1, tNode o2) {
+            return o1.distance - o2.distance;
+        }
+    }
+
+    public static List<tNode> dijkstra2(Node from) {
+
+        Code02_HeapGreater<tNode> heapGreater =
+                new Code02_HeapGreater<tNode>(new ArrayList<tNode>(), new HashMap<tNode, Integer>(), new MyComparator());
+
+
+        ArrayList<tNode> res = new ArrayList<>();
+
+        heapGreater.push(new tNode(from, 0));
+
+        while (!heapGreater.isEmpty()) {
+            tNode pop = heapGreater.pop();
+            int distance = pop.distance;
+
+            for (Edge edge : pop.node.edges) {
+
+            }
+        }
     }
 
 }

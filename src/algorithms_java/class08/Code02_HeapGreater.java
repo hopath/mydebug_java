@@ -35,11 +35,14 @@ public class Code02_HeapGreater<T> {
         return heap.get(0);
     }
 
+
+
     public void push(T obj) {
         heap.add(obj);
         hashMap.put(obj, heapSize);
         heapInsert(heapSize++);
     } 
+
 
     public T pop(){
         T t = heap.get(0);
@@ -50,23 +53,28 @@ public class Code02_HeapGreater<T> {
         return t;
     }
 
+    //对改变值的Node重新调整位置
     public void resign(T obj){
         int i = hashMap.get(obj);
         heapInsert(i);
         heapify(i);
     }
 
+
+    //删除指定Node
     public void remove(T obj){
         int i = hashMap.get(obj);
         swap(i, heapSize - 1);
         T t = heap.get(i);
         heap.remove(--heapSize);
         hashMap.remove(obj);
+        //若删除的是最后一个对象则不用再resign
         if(obj != t){
             resign(t);
         }
     }
 
+    //向下调整
     private void heapify(int i){
         int left = 2 * i + 1;
         while(left < heapSize - 1){
@@ -80,6 +88,8 @@ public class Code02_HeapGreater<T> {
             left = 2 * i + 1;
         }
     }
+
+    //向上调整
     private void heapInsert(int i) {
         while (cmp.compare(heap.get(i), heap.get((i - 1) / 2)) < 0) {
             swap(i, (i - 1) / 2);
