@@ -149,6 +149,7 @@ public class Code08_Dijkstra {
         }
     }
 
+
     public static HashMap<Node, Integer> dijkstra2(Node from, int size) {
         NodeHeap nodeHeap = new NodeHeap(size);
         HashMap<Node, Integer> res = new HashMap<>();
@@ -168,7 +169,6 @@ public class Code08_Dijkstra {
 
             res.put(node, distance);
         }
-
         return res;
     }
 
