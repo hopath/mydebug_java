@@ -10,6 +10,7 @@ public class Code01_Hanoi {
         hanoi2(2, "a", "b", "c");
     }
 
+
     public static void hanoi2(int n, String from, String to, String other) {
         if (n > 0) {
             func(n, from, to, other);
