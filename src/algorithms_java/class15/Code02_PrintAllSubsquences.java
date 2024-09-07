@@ -19,6 +19,8 @@ public class Code02_PrintAllSubsquences {
         }
     }
 
+
+
     public static List<String> subs(String str) {
         char[] chars = str.toCharArray();
         String path = "";
