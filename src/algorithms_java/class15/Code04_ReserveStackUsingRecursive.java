@@ -1,6 +1,6 @@
 package algorithms_java.class15;
 
-import java.util.ArrayList;
+import java.util.Stack;
 
 /**
  * @author 张志伟
@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Code04_ReserveStackUsingRecursive {
 
-//    public void reserveStack(ArrayList<Character> leaves) {
-//        if()
-//    }
+    public void reverse(Stack<Integer> stack){
+
+    }
 }
