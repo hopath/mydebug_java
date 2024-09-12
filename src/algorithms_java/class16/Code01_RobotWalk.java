@@ -79,7 +79,6 @@ public class Code01_RobotWalk {
 
         //将算完的结果放入缓冲表
         dp[cur][rests] = ans;
-
         return ans;
     }
 
