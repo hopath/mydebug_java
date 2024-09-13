@@ -88,24 +88,15 @@ public class Code01_RobotWalk {
         return dp[start][K];
     }
 
+    //状态转移
     public static void process03(int N, int K, int aim, int[][] dp) {
-        //按列遍历
-        for (int rests = 0; rests <= K; rests++) {
-            for (int cur = 1; cur <= N; cur++) {
-                if (rests == 0) {
-                    if (cur == aim) {
-                        dp[cur][0] = 1;
-                    } else {
-                        dp[cur][0] = 0;
-                    }
-                } else if (cur == 1) {
-                    dp[cur][rests] = dp[cur + 1][rests - 1];
-                } else if (cur == N) {
-                    dp[cur][rests] = dp[cur - 1][rests - 1];
-                } else {
-                    dp[cur][rests] = dp[cur + 1][rests - 1] + dp[cur - 1][rests - 1];
-                }
+        dp[aim][0] = 1;
+        for (int rests = 1; rests <= K; rests++) {
+            dp[1][rests] = dp[2][rests - 1];
+            for (int cur = 2; cur < N; cur++) {
+                dp[cur][rests] = dp[cur + 1][rests - 1] + dp[cur - 1][rests - 1];
             }
+            dp[N][rests] = dp[N - 1][rests - 1];
         }
     }
 }
