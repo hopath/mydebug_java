@@ -38,4 +38,6 @@ public class Code02_CardsInLine {
 
         return Math.min(p1, p2);
     }
+
+
 }
