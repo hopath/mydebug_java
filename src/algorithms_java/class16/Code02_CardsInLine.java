@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
  * @version 1.0
  */
 public class Code02_CardsInLine {
-
     @Test
     public void test() {
         int[] arr = {2, 6, 7, 8, 4};
