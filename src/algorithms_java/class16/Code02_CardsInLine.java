@@ -38,6 +38,8 @@ public class Code02_CardsInLine {
         return Math.max(Fdp[0][arr.length - 1], Gdp[0][arr.length - 1]);
     }
 
+
+
     public static int win2(int[] arr) {
         if (arr == null || arr.length == 0) {
             return 0;
