@@ -9,44 +9,33 @@ import org.junit.jupiter.api.Test;
 public class Code02_CardsInLine {
     @Test
     public void test() {
-        int[] arr = {2, 6, 7, 8, 4};
+        int[] arr = {2, 9, 7, 8, 4, 3};
         System.out.println(win1(arr));
         System.out.println(win2(arr));
+        System.out.println(win3(arr));
     }
 
+    //状态转化
+    public static int win3(int[] arr) {
+        int[][] Fdp = new int[arr.length][arr.length];
+        int[][] Gdp = new int[arr.length][arr.length];
 
-    public static int win1(int[] arr) {
-        if (arr == null || arr.length == 0) {
-            return 0;
-        }
-        int first = f1(arr, 0, arr.length - 1);
-        int second = g1(arr, 0, arr.length - 1);
-
-        return Math.max(first, second);
-    }
-    //先手拿最大值
-    public static int f1(int[] arr, int start, int end) {
-        if (start == end) {
-            return arr[start];
+        for (int i = 0; i < Fdp.length; i++) {
+            Fdp[i][i] = arr[i];
         }
 
-        int p1 = arr[start] + g1(arr, start + 1, end);
-        int p2 = arr[end] + g1(arr, start, end - 1);
-
-        return Math.max(p1, p2);
-    }
-
-    //后手只能拿最小值
-    public static int g1(int[] arr, int start, int end) {
-        if (start == end) {
-            return 0;
+        for (int i = 1; i < Fdp.length; i++) {
+            for (int j = i; j < Fdp.length; j++) {
+                int start = j - i;
+                int end = j;
+                Fdp[start][end] =
+                        Math.max(arr[start] + Gdp[start + 1][end], arr[end] + Gdp[start][end - 1]);
+                Gdp[start][end] =
+                        Math.min(Fdp[start + 1][end], Fdp[start][end - 1]);
+            }
         }
 
-        //先手拿了左侧牌的情况
-        int p1 = f1(arr, start + 1, end);
-        int p2 = f1(arr, start, end - 1);
-
-        return Math.min(p1, p2);
+        return Math.max(Fdp[0][arr.length - 1], Gdp[0][arr.length - 1]);
     }
 
     public static int win2(int[] arr) {
@@ -107,4 +96,42 @@ public class Code02_CardsInLine {
         dp2[start][end] = res;
         return res;
     }
+
+
+    public static int win1(int[] arr) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+        int first = f1(arr, 0, arr.length - 1);
+        int second = g1(arr, 0, arr.length - 1);
+
+        return Math.max(first, second);
+    }
+
+    //先手拿最大值
+    public static int f1(int[] arr, int start, int end) {
+        if (start == end) {
+            return arr[start];
+        }
+
+        int p1 = arr[start] + g1(arr, start + 1, end);
+        int p2 = arr[end] + g1(arr, start, end - 1);
+
+        return Math.max(p1, p2);
+    }
+
+    //后手只能拿最小值
+    public static int g1(int[] arr, int start, int end) {
+        if (start == end) {
+            return 0;
+        }
+
+        //先手拿了左侧牌的情况
+        int p1 = f1(arr, start + 1, end);
+        int p2 = f1(arr, start, end - 1);
+
+        return Math.min(p1, p2);
+    }
+
+
 }
