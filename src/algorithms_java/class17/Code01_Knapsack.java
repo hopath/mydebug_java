@@ -66,7 +66,6 @@ public class Code01_Knapsack {
                 dp[index][rest] = Math.max(p1, p2);
             }
         }
-
         return dp[0][bag];
     }
 }
