@@ -63,12 +63,11 @@ public class Code02_ConvertToLetterString {
         int[] dp = new int[chars.length + 1];
         dp[dp.length - 1] = 1;
         for (int i = dp.length - 2; i >= 0; i--) {
-            if (chars[i] == '0') {
-                dp[i] = 0;
-            }
-            dp[i] = dp[i + 1];
-            if (i + 1 < chars.length && (chars[i + 1] - '0') * 10 + (chars[i] - '0') < 27) {
-                dp[i] = dp[i] + dp[i + 2];
+            if (chars[i] != '0') {
+                dp[i] = dp[i + 1];
+                if (i + 1 < chars.length && (chars[i + 1] - '0') * 10 + (chars[i] - '0') < 27) {
+                    dp[i] = dp[i] + dp[i + 2];
+                }
             }
         }
         return dp[0];
