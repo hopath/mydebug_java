@@ -59,7 +59,6 @@ public class Code02_ConvertToLetterString {
         return ways;
     }
 
-
     public static int dp(char[] chars) {
         int[] dp = new int[chars.length + 1];
         dp[dp.length - 1] = 1;
