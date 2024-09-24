@@ -8,7 +8,6 @@ import com.sun.xml.internal.bind.v2.util.StackRecorder;
  */
 public class Code03_StickersToSpellWord {
 
-
     public static int minStick(String[] strs, String target){
         if(target == null || target.length() == 0){
             return 0;
