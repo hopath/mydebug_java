@@ -62,6 +62,7 @@ public class Code03_StickersToSpellWord {
                     }
                 }
             }
+
             String rest = stringBuffer.toString();
             if(rest.length() != target.length()){
                 Math.min(min, process02(sticks, rest));
