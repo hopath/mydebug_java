@@ -17,7 +17,6 @@ public class Code03_StickersToSpellWord {
         System.out.println(minStack03(strs, "dsca"));
     }
 
-
     public static int minStick02(String[] stickers, String target) {
         if (target == null || target.length() == 0) {
             return 0;
