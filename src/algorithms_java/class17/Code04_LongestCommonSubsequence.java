@@ -5,7 +5,6 @@ package algorithms_java.class17;
  * @version 1.0
  */
 public class Code04_LongestCommonSubsequence {
-
     //返回两个字符串相同字符组成的最大子字符串(不需要连续)的个数
     public int longestCommonSubsequence(String text1, String text2) {
         if (text1 == null || text2 == null || text1.length() == 0 || text2.length() == 0) {
