@@ -86,7 +86,6 @@ public class Code04_LongestCommonSubsequence {
                 dp[i][j] = Math.max(p1, Math.max(p2, p3));
             }
         }
-
         return dp[str1.length - 1][str2.length - 1];
     }
 }
