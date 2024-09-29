@@ -26,6 +26,7 @@ public class Code02_ConvertToLetterString {
         return process(chars, 0);
     }
 
+    //将一个只含数字的字符串转换成数字对应的asccii码字符所组成字符串的方法数(只能转成小写字母)
     public static int nums2(String str) {
         if (str == null || str.length() == 0) {
             return 0;

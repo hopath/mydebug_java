@@ -15,7 +15,7 @@ public class Code02_CardsInLine {
         System.out.println(win3(arr));
     }
 
-    //状态转化
+    //两人博弈抽卡
     public static int win3(int[] arr) {
         int[][] Fdp = new int[arr.length][arr.length];
         int[][] Gdp = new int[arr.length][arr.length];

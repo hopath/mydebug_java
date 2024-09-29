@@ -17,6 +17,7 @@ public class Code01_Knapsack {
         System.out.println(dp(w, v, 20));
     }
 
+    //背包一定, 返回最大值
     public static int getMaxValue(int[] w, int[] v, int bag) {
         if (w == null || w.length == 0 || w.length != v.length || v == null || v.length == 0) {
             return 0;
