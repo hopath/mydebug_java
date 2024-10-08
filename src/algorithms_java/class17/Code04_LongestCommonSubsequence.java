@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
  * @author 张志伟
  * @version 1.0
  */
+
+//样本尝试模型
 public class Code04_LongestCommonSubsequence {
-
-
     @Test
     public void test(){
         System.out.println(longestCommonSubsequence02("abcde", "ace"));

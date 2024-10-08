@@ -6,7 +6,44 @@ import algorithms_java.class17.Code04_LongestCommonSubsequence;
  * @author 张志伟
  * @version 1.0
  */
+
+//范围尝试模型
 public class Code01_PalindromeSubsequence {
+
+
+
+    public int longestPalindromeSubseq03(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        return process03(s.toCharArray(), 0, s.length() - 1);
+    }
+
+    public int process03(char[] chars, int L, int R) {
+        if (L == R) {
+            return 1;
+        }
+
+        if (L == R - 1) {
+            return chars[L] == chars[R] ? 2 : 1;
+        }
+
+        //左右都不是最长公共子序列的开头或结尾
+        int p1 = process03(chars, L + 1, R - 1);
+
+        //左边不可能是开头，右边可能是结尾
+        int p2 = process03(chars, L, R - 1);
+
+        //左边可能是开头，右边不可能是结尾
+        int p3 = process03(chars, L + 1, R);
+
+        //左右是开头或结尾
+        int p4 = chars[L] == chars[R] ? (2 + process03(chars, L - 1, R - 1)) : 0;
+
+        return Math.max(p1, Math.max(p2, Math.max(p3, p4)));
+    }
+
     //求一个字符串中最长回文子序列
     public int longestPalindromeSubseq02(String s) {
         //将字符串逆序
@@ -18,24 +55,23 @@ public class Code01_PalindromeSubsequence {
         return commonSubsequence.longestCommonSubsequence02(s, reverseString);
     }
 
-    private String reverseString(String s){
+    private String reverseString(String s) {
         char[] chars = s.toCharArray();
         int left = 0;
         int right = s.length() - 1;
 
-        while(left < right){
+        while (left < right) {
             swap(chars, left++, right--);
         }
 
         return String.valueOf(chars);
     }
 
-    private void swap(char[] chars, int i, int j){
+    private void swap(char[] chars, int i, int j) {
         char tmp = chars[i];
         chars[i] = chars[j];
         chars[j] = tmp;
     }
-
 
 
     public int longestPalindromeSubseq01(String s) {

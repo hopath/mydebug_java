@@ -2,7 +2,6 @@ package algorithms_java.class17;
 
 import org.junit.jupiter.api.Test;
 
-import javax.naming.PartialResultException;
 
 /**
  * @author 张志伟
