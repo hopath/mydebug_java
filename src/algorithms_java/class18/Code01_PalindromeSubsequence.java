@@ -1,6 +1,7 @@
 package algorithms_java.class18;
 
 import algorithms_java.class17.Code04_LongestCommonSubsequence;
+import org.junit.jupiter.api.Test;
 
 /**
  * @author 张志伟
@@ -9,6 +10,44 @@ import algorithms_java.class17.Code04_LongestCommonSubsequence;
 
 //范围尝试模型
 public class Code01_PalindromeSubsequence {
+
+    @Test
+    public void test(){
+        System.out.println(longestPalindromeSubseq04("bbbab"));
+    }
+    public int longestPalindromeSubseq04(String s) {
+        if (s == null || s.length() == 0) {
+            return 0;
+        }
+
+        int N = s.length();
+        int[][] dp = new int[N][N];
+        char[] chars = s.toCharArray();
+
+        for (int i = 0; i < N; i++) {
+            dp[i][i] = 1;
+        }
+
+        for (int i = 0; i < N - 1; i++) {
+            dp[i][i + 1] = chars[i] == chars[i + 1] ? 2 : 1;
+        }
+
+        for (int i = 2; i < N; i++) {
+            for (int j = 0; j < N - i; j++) {
+                int r = j;
+                int c = j + i;
+
+                int p1 = dp[r + 1][c - 1];
+                int p2 = dp[r][c - 1];
+                int p3 = dp[r + 1][c];
+                int p4 = chars[r] == chars[c] ? 2 + dp[r + 1][c - 1] : 0;
+
+                dp[r][c] = Math.max(p1, Math.max(p2, Math.max(p3, p4)));
+            }
+        }
+
+        return dp[0][N - 1];
+    }
 
     public int longestPalindromeSubseq03(String s) {
         if (s == null || s.length() == 0) {
@@ -37,10 +76,11 @@ public class Code01_PalindromeSubsequence {
         int p3 = process03(chars, L + 1, R);
 
         //左右是开头或结尾
-        int p4 = chars[L] == chars[R] ? (2 + process03(chars, L - 1, R - 1)) : 0;
+        int p4 = chars[L] == chars[R] ? (2 + process03(chars, L + 1, R - 1)) : 0;
 
         return Math.max(p1, Math.max(p2, Math.max(p3, p4)));
     }
+
 
     //求一个字符串中最长回文子序列
     public int longestPalindromeSubseq02(String s) {
