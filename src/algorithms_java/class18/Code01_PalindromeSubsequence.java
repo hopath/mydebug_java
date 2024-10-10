@@ -11,10 +11,6 @@ import org.junit.jupiter.api.Test;
 //范围尝试模型
 public class Code01_PalindromeSubsequence {
 
-    @Test
-    public void test(){
-        System.out.println(longestPalindromeSubseq04("bbbab"));
-    }
     public int longestPalindromeSubseq04(String s) {
         if (s == null || s.length() == 0) {
             return 0;
