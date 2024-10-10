@@ -33,12 +33,11 @@ public class Code01_PalindromeSubsequence {
                 int r = j;
                 int c = j + i;
 
-                int p1 = dp[r + 1][c - 1];
-                int p2 = dp[r][c - 1];
-                int p3 = dp[r + 1][c];
-                int p4 = chars[r] == chars[c] ? 2 + dp[r + 1][c - 1] : 0;
+                int p1 = dp[r][c - 1];
+                int p2 = dp[r + 1][c];
+                int p3 = chars[r] == chars[c] ? 2 + dp[r + 1][c - 1] : 0;
 
-                dp[r][c] = Math.max(p1, Math.max(p2, Math.max(p3, p4)));
+                dp[r][c] = Math.max(p1, Math.max(p2, p3));
             }
         }
 
@@ -63,6 +62,7 @@ public class Code01_PalindromeSubsequence {
         }
 
         //左右都不是最长公共子序列的开头或结尾
+        //由于左一定比左下大故可以省略
         int p1 = process03(chars, L + 1, R - 1);
 
         //左边不可能是开头，右边可能是结尾
