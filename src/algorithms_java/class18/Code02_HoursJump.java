@@ -78,4 +78,5 @@ public class Code02_HoursJump {
 
         return ways;
     }
+
 }
