@@ -18,8 +18,8 @@ public class Code02_HoursJump {
 
     @Test
     public void test(){
-        System.out.println(ways01(3,4, 5));
-        System.out.println(ways02(3,4, 5));
+        System.out.println(ways01(3,4, 3));
+        System.out.println(ways02(3,4, 3));
     }
 
     public static int ways02(int x, int y, int k) {
@@ -29,36 +29,39 @@ public class Code02_HoursJump {
     public static int dp(int xp, int yp, int k) {
         int dp[][][] = new int[9][10][k + 1];
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 9; j++) {
-                dp[i][j][0] = (i == xp && j == yp) ? 1 : 0;
-            }
-        }
+        dp[yp][xp][0] = 1;
 
-        for (int n = 1; n < k + 1; n++) {
-            for (int i = 0; i < 10; i++) {
-                for (int j = 0; j < 9; j++) {
-                    int ways = dp[i - 1][j + 2][n];
-                    ways += dp[i + 1][j + 2][n];
-                    ways += dp[i - 1][j - 2][n];
-                    ways += dp[i + 1][j - 2][n];
-                    ways += dp[i - 2][j + 1][n];
-                    ways += dp[i + 2][j + 1][n];
-                    ways += dp[i - 2][j - 1][n];
-                    ways += dp[i + 2][j - 1][n];
-                    dp[i][j][n] = ways;
+        for (int rest = 1; rest < k + 1; rest++) {
+            for (int x = 0; x < 10; x++) {
+                for (int y = 0; y < 9; y++) {
+                    int ways = pick(dp,y - 1, x + 2, rest - 1);
+                    ways += pick(dp, y + 1, x + 2, rest - 1);
+                    ways += pick(dp, y - 1, x - 2, rest - 1);
+                    ways += pick(dp,  y + 1, x - 2, rest - 1);
+                    ways += pick(dp,  y - 2, x + 1, rest - 1);
+                    ways += pick(dp,  y + 2, x + 1, rest - 1);
+                    ways += pick(dp,  y - 2, x - 1, rest - 1);
+                    ways += pick(dp, y + 2, x - 1, rest - 1);
+                    dp[y][x][rest] = ways;
                 }
+
             }
         }
+        return dp[0][0][k];
+    }
 
-        return dp[xp][yp][k];
+    public static int pick(int[][][] dp, int y, int x, int rest){
+        if (x < 0 || y < 0 || x > 9 || y > 8) {
+            return 0;
+        }
+        return dp[y][x][rest];
     }
 
     public static int ways01(int x, int y, int k) {
-        return process01(x, y, 0, 0, k);
+        return pic(x, y, 0, 0, k);
     }
 
-    public static int process01(int xp, int yp, int x, int y, int k) {
+    public static int pic(int xp, int yp, int x, int y, int k) {
         if (x < 0 || y < 0 || x > 9 || y > 8) {
             return 0;
         }
@@ -67,14 +70,14 @@ public class Code02_HoursJump {
             return (x == xp && y == yp) ? 1 : 0;
         }
 
-        int ways = process01(xp, yp, x - 1, y + 2, k--);
-        ways += process01(xp, yp, x + 1, y + 2, k--);
-        ways += process01(xp, yp, x - 1, y - 2, k--);
-        ways += process01(xp, yp, x + 1, y - 2, k--);
-        ways += process01(xp, yp, x - 2, y + 1, k--);
-        ways += process01(xp, yp, x + 2, y + 1, k--);
-        ways += process01(xp, yp, x - 2, y - 1, k--);
-        ways += process01(xp, yp, x + 2, y - 1, k--);
+        int ways = pic(xp, yp, x - 1, y + 2, k - 1);
+        ways += pic(xp, yp, x + 1, y + 2, k - 1);
+        ways += pic(xp, yp, x - 1, y - 2, k - 1);
+        ways += pic(xp, yp, x + 1, y - 2, k - 1);
+        ways += pic(xp, yp, x - 2, y + 1, k - 1);
+        ways += pic(xp, yp, x + 2, y + 1, k - 1);
+        ways += pic(xp, yp, x - 2, y - 1, k - 1);
+        ways += pic(xp, yp, x + 2, y - 1, k - 1);
 
         return ways;
     }
