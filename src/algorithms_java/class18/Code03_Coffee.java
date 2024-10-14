@@ -8,6 +8,7 @@ import java.util.PriorityQueue;
  * @version 1.0
  */
 public class Code03_Coffee {
+
     static class Machine {
         int workPoint;
         int workTime;
