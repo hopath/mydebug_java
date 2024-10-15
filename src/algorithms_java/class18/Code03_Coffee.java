@@ -21,12 +21,51 @@ import java.util.PriorityQueue;
  */
 public class Code03_Coffee {
 
+    // for test
+    public static int[] randomArray(int len, int max) {
+        int[] arr = new int[len];
+        for (int i = 0; i < len; i++) {
+            arr[i] = (int) (Math.random() * max) + 1;
+        }
+        return arr;
+    }
+
+    // for test
+    public static void printArray(int[] arr) {
+        System.out.print("arr : ");
+        for (int j = 0; j < arr.length; j++) {
+            System.out.print(arr[j] + ", ");
+        }
+        System.out.println();
+    }
+
     @Test
     public void test(){
-        int[] arr = {1, 3, 2, 5};
-        System.out.println(minTime(arr, 8, 4, 9));
-        System.out.println(minTimeDp(arr, 8, 4, 9));
+        int len = 10;
+        int max = 10;
+        int testTime = 10;
+        System.out.println("测试开始");
+        for (int i = 0; i < testTime; i++) {
+            int[] arr = randomArray(len, max);
+            int n = (int) (Math.random() * 7) + 1;
+            int a = (int) (Math.random() * 7) + 1;
+            int b = (int) (Math.random() * 10) + 1;
+            int ans1 = minTime(arr, n, a, b);
+            int ans2 = minTimeDp(arr, n, a, b);
+            int ans3 = minTimeDp(arr, n, a, b);
+            if (ans1 != ans2 || ans2 != ans3) {
+                printArray(arr);
+                System.out.println("n : " + n);
+                System.out.println("a : " + a);
+                System.out.println("b : " + b);
+                System.out.println(ans1 + " , " + ans2 + " , " + ans3);
+                System.out.println("===============");
+                break;
+            }
+        }
+        System.out.println("测试结束");
     }
+
 
     static class Machine {
         int workPoint;
