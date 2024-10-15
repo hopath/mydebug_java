@@ -122,5 +122,4 @@ public class Code03_Coffee {
 
         return Math.min(washTime1, washTime2);
     }
-
 }
