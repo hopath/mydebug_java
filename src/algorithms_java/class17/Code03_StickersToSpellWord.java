@@ -8,6 +8,8 @@ import java.util.HashMap;
  * @author 张志伟
  * @version 1.0
  */
+//求要拼成一个指定字符串，需要贴纸的最小张数(贴纸可剪至最小单位，且可任意组合)
+//剪枝
 public class Code03_StickersToSpellWord {
 
     @Test
@@ -17,7 +19,6 @@ public class Code03_StickersToSpellWord {
         System.out.println(minStack03(strs, "dsca"));
     }
 
-    //求要拼成一个指定字符串，需要贴纸的最小张数(贴纸可剪至最小单位，且可任意组合)
     public static int minStick02(String[] stickers, String target) {
         if (target == null || target.length() == 0) {
             return 0;
