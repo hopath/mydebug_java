@@ -19,14 +19,11 @@ public class Code01_MinPathSum {
         int N = matrix[0].length;
 
         if (x == M - 1 && y == N - 1) {
+            return matrix[x][y] + Math.min(process(matrix, x + 1, y), process(matrix, x, y + 1));
+        }
+
+        if(x == 0 || y == 0){
             return matrix[x][y];
-        }else{
-            if(x == M - 1){
-                return matrix[x][y];
-            }
-            if(y == N - 1){
-                return matrix[x][y];
-            }
         }
 
         int p1 = process(matrix, x + 1, y);
