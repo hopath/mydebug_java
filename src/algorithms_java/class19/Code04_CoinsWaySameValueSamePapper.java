@@ -1,5 +1,7 @@
 package algorithms_java.class19;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +22,12 @@ arr是货币数组,其中的值都是正数。再给定一个正数aim。
  */
 public class Code04_CoinsWaySameValueSamePapper {
 
+    @Test
+    public void test(){
+        int[] arr = {2, 1, 3, 1, 1, 2, 3};
+        System.out.println(ways(arr, 10));
+        System.out.println(dp(arr, 10));
+    }
     static class Info {
         int[] coins; //面值
         int[] zs; //张数
@@ -92,10 +100,10 @@ public class Code04_CoinsWaySameValueSamePapper {
 
         dp[N][0] = 1;
 
-        for (int index = N - 1; index >= 0; index++) {
+        for (int index = N - 1; index >= 0; index--) {
             for (int rest = 0; rest <= aim; rest++) {
                 dp[index][rest] = dp[index + 1][rest] +
-                        pick(dp, index + 1, rest - zs[index] * coins[index]) -
+                        pick(dp, index, rest - coins[index]) -
                         pick(dp, index + 1, rest - (zs[index] + 1) * coins[index]);
             }
         }
@@ -109,5 +117,4 @@ public class Code04_CoinsWaySameValueSamePapper {
         }
         return dp[i][j];
     }
-
 }
