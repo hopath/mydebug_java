@@ -16,6 +16,7 @@ Bob一共要迈出k步,且每步都会等概率向上下左右四个方向走一
  */
 public class Code05_BobDie {
 
+
     @Test
     public void test() {
         System.out.println(saveRate(9, 8, 2, 3, 6));
